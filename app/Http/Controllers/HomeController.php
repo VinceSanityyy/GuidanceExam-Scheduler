@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+
 class HomeController extends Controller
+
 {
     /**
      * Create a new controller instance.
@@ -48,7 +50,7 @@ class HomeController extends Controller
            ]);
     }
 
-    public function updateUser(Request $request,$id){
+    public function updateUser(Request $request, User $user,$id){
 
         $user= User::findOrFail($id);
 
@@ -63,5 +65,10 @@ class HomeController extends Controller
         $user->email = $request->email;
         $user->isConfirmed = $request->isConfirmed;
         $user->save($request->all());
+    }
+
+    public function deleteUser($id){
+        $user = User::findOrFail($id);
+        $user->delete();
     }
 }

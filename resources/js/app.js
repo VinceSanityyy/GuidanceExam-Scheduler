@@ -29,6 +29,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const routes = [
     { path: '/calendar', component: require('./components/Calendar.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
   ]
 
 const router = new VueRouter({

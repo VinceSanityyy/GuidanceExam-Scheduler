@@ -113,6 +113,7 @@
                editmode: false,
                users: [],
                form: new Form({
+                   id:'',
                    name:'',
                    id_number:'',
                    isConfirmed:'',
@@ -163,6 +164,29 @@
                 console.log(e)
               })
           },
+        deleteUser(id){
+             swal.fire({
+            title: "Are you sure?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+             }).then(result => {
+              //send delete request
+              if (result.value) {
+              this.form.delete('/deleteUser/' +id)
+                .then(()=>{
+                    swal.fire("Deleted!", "", "success");
+                    this.getUsers()
+                })
+                .catch(()=>{
+                    swal.fire("Deleted!", "", "success");
+                    this.getUsers()
+                });
+              }
+          });
+          }
        },
        created() {
            this.getUsers()
