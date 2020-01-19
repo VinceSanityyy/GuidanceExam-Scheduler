@@ -35,9 +35,14 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return schedule::create([
+            'schedule_type' => $request['type'],
+            'sched_date' => $request['date'],
+            'id_number' => $request['id_number'],
+            'user_id' => \Auth::user()->id,
+            'isConfirmed' => 0
+           ]);
     }
-
     /**
      * Display the specified resource.
      *

@@ -25,4 +25,7 @@ Route::delete('/deleteUser/{id}','HomeController@deleteUser');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Schedule
+Route::post('/addSchedule','ScheduleController@store');
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );
+

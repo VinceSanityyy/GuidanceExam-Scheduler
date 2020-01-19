@@ -1965,8 +1965,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: new Form({
+        date: '',
+        type: ''
+      })
+    };
+  },
+  methods: {
+    createSchedule: function createSchedule() {
+      this.form.post('/addSchedule').then(function (_ref) {
+        var data = _ref.data;
+        swal.fire("Schedule Created!", "", "success");
+        console.log(data);
+      });
+    },
+    getSchedules: function getSchedules() {
+      console.log('Schedules must be set to 1 to display');
+    }
+  },
   mounted: function mounted() {
+    this.getSchedules();
     console.log('Component mounted.');
   }
 });
@@ -41723,66 +41753,144 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-3" }, [
+      _c("div", { staticClass: "box box-success" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            on: {
+              click: function($event) {
+                return _vm.createSchedule()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "box-body" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Type")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.type,
+                        expression: "form.type"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.form,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", [_vm._v("Consultation")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("Examination")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("Date:")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group date" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.date,
+                        expression: "form.date"
+                      }
+                    ],
+                    staticClass: "form-control pull-right",
+                    attrs: { type: "date" },
+                    domProps: { value: _vm.form.date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "date", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block btn-success",
+                  attrs: { type: "button" }
+                },
+                [_vm._v("Request Schedule")]
+              )
+            ])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(2)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-3" }, [
-        _c("div", { staticClass: "box box-success" }, [
-          _c("div", { staticClass: "box-header with-border" }, [
-            _c("h3", { staticClass: "box-title" }, [_vm._v("Add Event")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "box-tools pull-right" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-box-tool",
-                  attrs: { type: "button", "data-widget": "remove" }
-                },
-                [_c("i", { staticClass: "fa fa-times" })]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "box-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Type")]),
-              _vm._v(" "),
-              _c("select", { staticClass: "form-control" }, [
-                _c("option", [_vm._v("Consultation")]),
-                _vm._v(" "),
-                _c("option", [_vm._v("Examination")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Date:")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group date" }, [
-                _c("div", { staticClass: "input-group-addon" }, [
-                  _c("i", { staticClass: "fa fa-calendar" })
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control pull-right",
-                  attrs: { type: "date" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-block btn-success",
-                attrs: { type: "button" }
-              },
-              [_vm._v("Request Schedule")]
-            )
-          ])
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Add Event")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools pull-right" }, [
+        _c("button", {
+          staticClass: "btn btn-box-tool",
+          attrs: { type: "button", "data-widget": "remove" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-addon" }, [
+      _c("i", { staticClass: "fa fa-calendar" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-9" }, [
+      _c("div", { staticClass: "box box-success" }, [
+        _c("div", { staticClass: "box-header with-border" }, [
+          _c("h3", { staticClass: "box-title" }, [_vm._v("Calendar Goes Here")])
         ])
       ])
     ])
@@ -57850,8 +57958,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\NCGC\Desktop\guidancescheduler\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\NCGC\Desktop\guidancescheduler\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\NCGC\Desktop\scheduler\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\NCGC\Desktop\scheduler\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

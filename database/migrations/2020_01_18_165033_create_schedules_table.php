@@ -15,11 +15,10 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('schedule_type');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->boolean('isConfirmed')->default(0);
+            $table->date('sched_date');
+            $table->boolean('isConfirmed')->default(0)->nullable();
             $table->timestamps();
         });
 
