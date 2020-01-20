@@ -15,6 +15,7 @@ class ScheduleController extends Controller
     public function index()
     {
         //
+        return schedule::all();
     }
 
     /**
