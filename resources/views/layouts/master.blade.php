@@ -313,11 +313,13 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Main Navigation</li>
         <li class="treeview">
+          @if(Auth::user()->id == 0)
             <router-link to="/dashboard" class="nav-link" > <i class="fa fa-dashboard "></i> <span> Dashboard</span> </router-link>
         </li>
         <li class="treeview">
             <router-link to="/users" class="nav-link" > <i class="fa fa-users "></i> <span> Users</span> </router-link>
           </li>
+          @endif
           <li class="treeview">
               <router-link to="/calendar" class="nav-link" > <i class="fa fa-calendar "></i> <span> Calendar</span> </router-link>
           </li>
