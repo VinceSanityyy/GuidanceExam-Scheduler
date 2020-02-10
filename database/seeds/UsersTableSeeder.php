@@ -16,6 +16,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'sysad@schedulerapp.com',
             'password' => Hash::make('123123123'),
             'id_number' => 0,
+            'course' => 1,
+            'age' => '20',
             'isConfirmed' => 1
         ]);
     }

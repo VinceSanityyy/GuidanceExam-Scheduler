@@ -38,6 +38,8 @@ class HomeController extends Controller
     public function addUser(Request $request){
         $this->validate($request, [
             'name' => 'required',
+            'age' => 'required',
+            'course' => 'required',
             'id_number' => 'required|unique:users',
             'email' => 'required|unique:users',
            ]);
@@ -46,6 +48,8 @@ class HomeController extends Controller
             'name' => $request['name'],
             'id_number' => $request['id_number'],
             'email' => $request['email'],
+            'age' => $request['age'],
+            'course' => $request['course'],
             'password' => \Hash::make('12345678')
            ]);
     }
@@ -63,6 +67,8 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->id_number = $request->id_number;
         $user->email = $request->email;
+        $user->age = $request->age;
+        $user->course = $request->course;
         $user->isConfirmed = $request->isConfirmed;
         $user->save($request->all());
     }
