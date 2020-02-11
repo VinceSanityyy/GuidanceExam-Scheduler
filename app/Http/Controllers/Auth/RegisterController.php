@@ -76,6 +76,7 @@ class RegisterController extends Controller
             'course' => $data['course'],
             'isConfirmed' => 0,
             'password' => Hash::make($data['password']),
+            'api_token' => \Str::random(60),
         ]);
     }
 
