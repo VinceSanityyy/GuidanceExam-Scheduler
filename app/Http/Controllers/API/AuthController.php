@@ -57,8 +57,21 @@ class AuthController extends ResponseController
        
         if(Auth::attempt(['email' => request('email'),'isConfirmed' => 1, 'password' => request('password')])){
         $user = $request->user();
-        $success['bearer_token'] =  $user->createToken('token')->accessToken;
-        return $this->sendResponse([$success,$user]);
+        $user_id = Auth::user()->id;
+        $id_number = Auth::user()->id_number;
+        $email = Auth::user()->email;
+        $name = Auth::user()->name;
+        $course = Auth::user()->course;
+        $success =  $user->createToken('token')->accessToken;
+        return $this->sendResponse([
+            'status' => 'success',
+            'bearer_token' =>$success,
+            'user_id' => $user_id,
+            'id_number' => $id_number,
+            'email' => $email,
+            'name' => $name,
+            'course' =>$course,
+            ]);
         }
 
         $error = "Unauthorized";

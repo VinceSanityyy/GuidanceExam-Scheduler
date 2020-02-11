@@ -13,10 +13,10 @@ class ResponseController extends Controller
     public function sendResponse($response)
     {
     //    $response = \Response::json(['status' => 'success',$response]);
-      
-       $response = \Response::json(array_merge(['status' => 'success',$response]));
+         return response()->json($response, 200);
+    //    $response = \Response::json(array_merge(['status' => 'success',$response]));
 
-       return $response;
+    //    return $response;
     }
 
 
