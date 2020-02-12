@@ -16428,13 +16428,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       from: new Date(),
       options: {
-        format: 'hh:mm',
+        format: 'HH:mm',
         showClear: true,
         showClose: true
       },
       to: new Date()
     }, "options", {
-      format: 'hh:mm',
+      format: 'HH:mm',
       showClear: true,
       showClose: true
     });
