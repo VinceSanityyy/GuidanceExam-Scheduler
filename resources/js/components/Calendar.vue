@@ -111,13 +111,13 @@
 
             from: new Date(),
                     options: {
-                    format: 'hh:mm',
+                    format: 'HH:mm',
                     showClear: true,
                     showClose: true,
                     },
             to: new Date(),
                     options: {
-                    format: 'hh:mm',
+                    format: 'HH:mm',
                     showClear: true,
                     showClose: true,
                     },
