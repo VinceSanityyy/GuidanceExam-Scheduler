@@ -31,5 +31,7 @@ Route::group([ 'prefix' => 'auth'], function (){
         Route::get('getQuestions','API\QuestionsController@viewQuestionsWithChoices');
         //Submit Answer
         Route::post('submit','API\QuestionsController@submitAnswer');
+
+        Route::get('/getSchedules','API\QuestionsController@getSchedules');
     });
 }); 

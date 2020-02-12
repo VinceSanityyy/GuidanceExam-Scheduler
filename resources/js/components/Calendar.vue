@@ -23,7 +23,25 @@
                      <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                      </div>
-                     <input v-model="form.date" type="date" class="form-control pull-right">
+                    <date-picker name="date" id="date" v-model="form.date" :config="opt" ></date-picker>
+                  </div>
+               </div>
+                   <div class="form-group">
+                  <label>From:</label>
+                  <div class="input-group date">
+                     <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                     </div>
+                    <date-picker name="from" id="from" v-model="form.from" :config="options" ></date-picker>
+                  </div>
+               </div>
+                   <div class="form-group">
+                  <label>To:</label>
+                  <div class="input-group date">
+                     <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                     </div>
+                    <date-picker name="to" id="to" v-model="form.to" :config="options" ></date-picker>
                   </div>
                </div>
                 <button type="button" class="btn btn-block btn-success" @click ="createSchedule()">Request Schedule</button>
@@ -75,10 +93,34 @@
             calendarEvents: [ // initial event data
                
             ],
+
             form: new Form({
                date:'',
-               type:''
-            })
+               type:'',
+               from:'',
+               to:''
+
+            }),
+
+            date: new Date(),
+                    opt: {
+                    format: 'YYYY-MM-DD',
+                    showClear: true,
+                    showClose: true,
+            },
+
+            from: new Date(),
+                    options: {
+                    format: 'hh:mm',
+                    showClear: true,
+                    showClose: true,
+                    },
+            to: new Date(),
+                    options: {
+                    format: 'hh:mm',
+                    showClear: true,
+                    showClose: true,
+                    },
          }
       },
       methods:{
@@ -86,18 +128,25 @@
             this.form.post('/addSchedule')
               .then(({data})=>{
                 swal.fire("Schedule Created!", "", "success");
+                
+                this.form.reset()
                 let classColor
+                 let params = { date: this.date};
                 if(data.schedule_type == 'Examination'){
                      classColor = 'examination'
                 } else {
                      classColor = 'consultation'
                 }
-                this.calendarEvents.push({ // add new event
-                  id: data.id,
-                  title: data.schedule_type,
-                  start: data.sched_date,
-                  className: classColor
-               })
+               //  this.calendarEvents.push({ // add new event
+               //    id: data.id,
+               //    title: data.schedule_type,
+               //    date: data.start_date,
+               //    start: data.start_date,
+               //    end: data.end_date,
+               //    className: classColor,
+               //    allDay: false,
+               //    timezone: 'local',
+               // })
               })
           },
           getSchedules(){
@@ -113,8 +162,11 @@
                      this.calendarEvents.push({ // set all the event 
                         id: res.id,
                         title: res.schedule_type,
-                        start: res.sched_date,
-                        className: classColor
+                        start: res.start_date,
+                        end: res.end_date,
+                        className: classColor,
+                        allDay: false,
+                        timezone: 'local',
                      })
                   })
                })

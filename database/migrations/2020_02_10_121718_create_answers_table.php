@@ -30,8 +30,8 @@ class CreateAnswersTable extends Migration
                     ->on('choices');
             
             $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users');
+                    ->references('user_id')
+                    ->on('schedules');
         });
     }
 

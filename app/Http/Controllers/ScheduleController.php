@@ -15,7 +15,11 @@ class ScheduleController extends Controller
     public function index()
     {
         //
-        return schedule::all();
+        // return schedule::all();
+        $schedules = \DB::table('schedules')
+                    ->where('isConfirmed',1)
+                    ->get();
+        return response()->json($schedules);
     }
 
     /**
@@ -38,11 +42,13 @@ class ScheduleController extends Controller
     {
         return schedule::create([
             'schedule_type' => $request['type'],
-            'sched_date' => $request['date'],
+            'start_date' => $request['date'].' '.$request['from'],
+            'end_date' => $request['date'].' '.$request['to'],
             'id_number' => $request['id_number'],
             'user_id' => \Auth::user()->id,
             'isConfirmed' => 0
            ]);
+        dd($request->all());
     }
     /**
      * Display the specified resource.

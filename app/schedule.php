@@ -9,7 +9,8 @@ class schedule extends Model
     protected $fillable = [
         'user_id',
         'schedule_type',
-        'sched_date',
+        'start_date',
+        'end_date',
         'isConfirmed',
     ];
 }

@@ -17,7 +17,8 @@ class CreateSchedulesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('schedule_type');
-            $table->date('sched_date');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->boolean('isConfirmed')->default(0)->nullable();
             $table->timestamps();
         });

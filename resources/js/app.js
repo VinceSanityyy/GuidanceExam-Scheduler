@@ -7,9 +7,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import swal from 'sweetalert2'
 import { Form, HasError, AlertError } from 'vform'
+
+import datePicker from 'vue-bootstrap-datetimepicker';
+import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
+
 Vue.use(VueRouter)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+Vue.use(require('vue-moment'));
+Vue.use(datePicker);
 
 window.swal = swal;
 window.Form = Form;
@@ -40,4 +46,7 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router,
+    components: {
+      datePicker,
+      }
 });

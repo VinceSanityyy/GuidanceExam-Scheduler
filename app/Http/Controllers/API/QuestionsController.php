@@ -63,4 +63,12 @@ class QuestionsController extends Controller
 
         
     }
+
+    public function getSchedules(){
+        $schedules = \DB::table('schedules')
+                    ->where('user_id',\Auth::user()->id)
+                    ->get();
+        
+        return response()->json($schedules);
+    }
 }
