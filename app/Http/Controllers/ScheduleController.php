@@ -94,4 +94,41 @@ class ScheduleController extends Controller
     {
         //
     }
+
+
+    public function getAllSchedules(){
+
+        $schedule = \DB::table('schedules')
+                    ->select('users.*','schedules.id as scid','schedules.user_id',
+                    'schedules.start_date','schedules.end_date','schedules.schedule_type',
+                    'schedules.isConfirmed',
+                    \DB::raw("SUBSTRING_INDEX(schedules.start_date, ' ', 1) AS date"),
+                    \DB::raw("SUBSTRING(schedules.start_date, LOCATE(' ', schedules.start_date)) AS start_time"),
+                    \DB::raw("SUBSTRING(schedules.end_date, LOCATE(' ', schedules.end_date)) AS end_time"),
+                    \DB::raw("CONCAT(schedules.start_date,' ',schedules.end_date) as combined_date"))
+                    ->join('users','users.id','=','schedules.user_id')
+                    ->get();
+
+                  
+        return response()->json($schedule);
+    }
+
+
+    public function updateSchedule(Request $request,$id){
+        $schedule_id = schedule::findOrFail($id);
+
+        $schedule_id->isConfirmed = $request->isConfirmed;
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+        $beautymail->send('emails.welcome', [], function($message) use($request) 
+            {
+                $message
+                    ->from('UMTC@umindanao.edu.ph')
+                    ->to($request->email)
+                    ->subject('UMTC Scheduler');
+            });
+        $schedule_id->save($request->all());
+
+     
+    
+    }
 }

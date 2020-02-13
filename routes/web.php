@@ -27,5 +27,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Schedule
 Route::post('/addSchedule','ScheduleController@store');
-Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );
+
 Route::post('/getSchedule','ScheduleController@index');
+
+Route::get('/getAllSchedule','ScheduleController@getAllSchedules');
+Route::put('/updateSchedule/{id}','ScheduleController@updateSchedule');
+
+Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );
