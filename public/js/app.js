@@ -78250,7 +78250,7 @@ var render = function() {
                 _vm._m(1),
                 _vm._v(" "),
                 _vm._l(_vm.schedules, function(schedule) {
-                  return _c("tr", { key: schedule.id }, [
+                  return _c("tr", { key: schedule.scid }, [
                     _c("td", [_vm._v(_vm._s(schedule.id_number))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(schedule.name))]),

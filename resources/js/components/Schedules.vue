@@ -17,7 +17,7 @@
                         <th>Current Status</th>
                         <th>Actions</th>
                      </tr>
-                     <tr v-for="schedule in schedules" :key="schedule.id">
+                     <tr v-for="schedule in schedules" :key="schedule.scid">
                         <td>{{schedule.id_number}}</td>
                         <td>{{schedule.name}}</td>
                         <td>{{schedule.schedule_type}}</td>
