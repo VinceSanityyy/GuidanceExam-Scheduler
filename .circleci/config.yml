@@ -50,6 +50,7 @@ jobs:
 
       # prepare the database
       - run: touch storage/testing.sqlite
+      - run: php artisan config:cache
 #       - run: php artisan migrate 
 #       - run : y
 
