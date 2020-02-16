@@ -7,79 +7,20 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function getAllScores(){
+        $all = \DB::table('answers')
+                ->join('choices', function ($q) {
+                $q->on('answers.choice_id','=','choices.choice_id')
+                ->on('answers.question_id', '=', 'choices.question_id');
+                })
+                ->select('schedules.schedule_type','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
+                \DB::raw('sum(choices.value) as score'))
+                ->join('users','users.id','answers.user_id')
+                ->join('schedules','schedules.user_id','answers.user_id')
+                ->where('schedules.schedule_type','Examination')
+                ->groupBy('answers.user_id')
+                ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Question $question)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Question $question)
-    {
-        //
+        return response()->json($all);
     }
 }

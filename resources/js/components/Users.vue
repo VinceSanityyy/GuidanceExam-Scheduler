@@ -14,6 +14,7 @@
                      <tr>
                         <th>Id Number</th>
                         <th>Name</th>
+                        <th>Gender</th>
                         <th>Email</th>
                         <th>Current Status</th>
                         <th>Actions</th>
@@ -21,6 +22,7 @@
                      <tr v-for="user in users" :key="user.id">
                         <td>{{user.id_number}}</td>
                         <td>{{user.name}}</td>
+                        <td>{{user.sex}}</td>
                         <td>{{user.email}}</td>
                         <td v-if="user.isConfirmed == 1"><span class="label label-success">Approved</span></td>
                         <td v-else><span class="label label-danger">Pending</span></td>

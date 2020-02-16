@@ -127,8 +127,5 @@ class ScheduleController extends Controller
                     ->subject('UMTC Scheduler');
             });
         $schedule_id->save($request->all());
-
-     
-    
     }
 }

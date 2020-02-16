@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'id_number' => ['required', 'string','unique:users'],
             'age' => 'required',
             'course' => 'required',
+            'sex' => 'required',
         ]);
     }
 
@@ -76,6 +77,7 @@ class RegisterController extends Controller
             'course' => $data['course'],
             'isConfirmed' => 0,
             'password' => Hash::make($data['password']),
+            'sex' =>$data['sex'],
             'api_token' => \Str::random(60),
         ]);
     }

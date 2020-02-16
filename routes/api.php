@@ -31,7 +31,13 @@ Route::group([ 'prefix' => 'auth'], function (){
         Route::get('getQuestions','API\QuestionsController@viewQuestionsWithChoices');
         //Submit Answer
         Route::post('submit','API\QuestionsController@submitAnswer');
-
+        //get Schedules
         Route::get('/getSchedules','API\QuestionsController@getSchedules');
+        //get Personal score with Details
+        Route::get('/getPersonalScore','API\QuestionsController@personalScore');
+        
+        //get Personal score with details
+        // Route::get('/getPersonalScoreWithDetails','API\QuestionsController@personalScoreWithDetails');
+
     });
 }); 

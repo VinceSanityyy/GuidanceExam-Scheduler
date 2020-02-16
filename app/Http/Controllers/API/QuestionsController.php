@@ -71,4 +71,43 @@ class QuestionsController extends Controller
         
         return response()->json($schedules);
     }
+
+    public function personalScore(){
+        $all = \DB::table('answers')
+                    ->join('choices', function ($q) {
+                    $q->on('answers.choice_id','=','choices.choice_id')
+                    ->on('answers.question_id', '=', 'choices.question_id');
+                    })
+                    ->select('schedules.schedule_type','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
+                    \DB::raw('sum(choices.value) as score'))
+                    ->join('users','users.id','answers.user_id')
+                    ->join('schedules','schedules.user_id','answers.user_id')
+                    ->where('schedules.schedule_type','Examination')
+                    ->where('answers.user_id',\Auth::user()->id)
+                    ->get();
+        return response()->json($all);
+        /**
+         * Classification
+         * 0-13 = Mild
+         * 14-19 = Minimal
+         * 20-28 = Moderate
+         * 29-63  = Severe
+         */
+    }
+
+    // public function personalScoreWithDetails(){
+    //     $all = \DB::table('answers')
+    //                 ->join('choices', function ($q) {
+    //                 $q->on('answers.choice_id','=','choices.choice_id')
+    //                 ->on('answers.question_id', '=', 'choices.question_id');
+    //                 })
+    //                 ->select('schedules.schedule_type','answers.user_id', 'users.name','users.course','users.age','users.email',
+    //                 \DB::raw('sum(choices.value) as score'))
+    //                 ->join('users','users.id','answers.user_id')
+    //                 ->join('schedules','schedules.user_id','answers.user_id')
+    //                 ->where('answers.user_id',\Auth::user()->id)
+    //                 ->get();
+    //     return response()->json($all);
+    // }
+
 }
