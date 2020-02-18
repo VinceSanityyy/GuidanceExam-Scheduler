@@ -58,6 +58,7 @@ class RegisterController extends Controller
             'age' => 'required',
             'course' => 'required',
             'sex' => 'required',
+            'mobile' => ['required','unique:users'],
         ]);
     }
 
@@ -78,6 +79,7 @@ class RegisterController extends Controller
             'isConfirmed' => 0,
             'password' => Hash::make($data['password']),
             'sex' =>$data['sex'],
+            'mobile' =>$data['mobile'],
             'api_token' => \Str::random(60),
         ]);
     }

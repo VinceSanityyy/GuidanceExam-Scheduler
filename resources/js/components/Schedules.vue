@@ -58,6 +58,16 @@
                            :class="{ 'is-invalid': form.errors.has('email') }"
                            />
                         <has-error :form="form" field="email"></has-error>
+
+                           <input
+                           v-model="form.mobile"
+                           type="hidden"
+                           name="mobile"
+                           placeholder="Mobile"
+                           class="form-control"
+                           :class="{ 'is-invalid': form.errors.has('mobile') }"
+                           />
+                        <has-error :form="form" field="mobile"></has-error>
                     
                      <div class="form-group">
                         <label>Change Status</label>
@@ -89,6 +99,7 @@
                    scid:'',
                    isConfirmed:'',
                    email:'',
+                   mobile:'',
                })
            }
        },
@@ -109,11 +120,21 @@
             this.form.fill(schedule)
           },
          updateSchedule(){
+             $('#exampleModal').modal('hide');
+             $(".modal-backdrop").remove();
+               let loader = this.$loading.show({
+                            container: this.fullPage ? null : this.$refs.formContainer,
+                            onCancel: this.onCancel,
+                            color: '#c91010',
+                            loader: 'bars',
+                            width: 80,
+                            height: 100,
+                            })
             this.form.put('/updateSchedule/' + this.form.scid)
               .then(()=>{
                   swal.fire("Status Updated!", "", "success");
-                $('#exampleModal').modal('hide');
-                $(".modal-backdrop").remove();
+                  loader.hide()  
+               
              this.getSchedules()
               })
               .catch((e)=>{

@@ -4,17 +4,8 @@
 
 	@include('beautymail::templates.widgets.articleStart')
 
-		<h4 class="secondary"><strong>Hello World</strong></h4>
-		<p>This is a test</p>
+		<h4 class="secondary"><strong>UMTC Guidance Office</strong></h4>
+		<p>Your schedule has been approved by the Guidance Office.</p>
 
 	@include('beautymail::templates.widgets.articleEnd')
-
-
-	@include('beautymail::templates.widgets.newfeatureStart')
-
-		<h4 class="secondary"><strong>Hello World again</strong></h4>
-		<p>This is another test</p>
-
-	@include('beautymail::templates.widgets.newfeatureEnd')
-
 @stop
