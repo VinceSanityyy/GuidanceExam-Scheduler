@@ -68,7 +68,7 @@ class HomeController extends Controller
         $user->id_number = $request->id_number;
         $user->email = $request->email;
         $user->age = $request->age;
-        $user->course = $request->course;
+        // $user->course = $request->course;
         $user->isConfirmed = $request->isConfirmed;
         $user->save($request->all());
     }

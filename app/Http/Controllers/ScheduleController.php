@@ -122,10 +122,22 @@ class ScheduleController extends Controller
         $beautymail->send('emails.welcome', [], function($message) use($request) 
             {
                 $message
-                    ->from('UMTC@umindanao.edu.ph')
+                    ->from('UMTC@umindanao.edu.ph','UMTC Scheduler')
                     ->to($request->email)
                     ->subject('UMTC Scheduler');
             });
+
+
+        $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+            $client = new \Nexmo\Client($basic);
+            
+        $message = $client->message()->send([
+                'to' => $request->mobile,
+                'from' => 'UMTC Scheduler',
+                'text' => 'Your request has been approved by the guidance office.'
+            ]);
+
+        
         $schedule_id->save($request->all());
     }
 }
