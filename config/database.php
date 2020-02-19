@@ -65,11 +65,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => 'remotemysql.com',
+            'host' => 'instance1.czndbsdbr7eb.ap-southeast-1.rds.amazonaws.com',
             'port' => '3306',
-            'database' => 'eX0FdXI1JE',
-            'username' => 'eX0FdXI1JE',
-            'password' =>'IjsokfWibY',
+            'database' => 'scheduler',
+            'username' => 'master',
+            'password' =>'password',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
