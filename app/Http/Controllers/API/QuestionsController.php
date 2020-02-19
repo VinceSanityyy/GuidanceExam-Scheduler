@@ -17,7 +17,7 @@ class QuestionsController extends Controller
 
             $choices = \DB::table('choices')
                         ->where('question_id',$request->question_id)
-                        ->select('choice','value')
+                        ->select('choice as label','value')
                         ->get();
 
         // $merged = $questions->merge($questions); 
