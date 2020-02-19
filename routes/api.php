@@ -28,7 +28,7 @@ Route::group([ 'prefix' => 'auth'], function (){
         Route::get('getuser', 'API\AuthController@getUser');
 
         //Questions
-        Route::get('getQuestions','API\QuestionsController@viewQuestionsWithChoices');
+        Route::post('getQuestions','API\QuestionsController@viewQuestionsWithChoices');
         //Submit Answer
         Route::post('submit','API\QuestionsController@submitAnswer');
         //get Schedules
