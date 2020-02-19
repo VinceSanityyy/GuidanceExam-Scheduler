@@ -54,6 +54,11 @@ class QuestionsController extends Controller
             'choice_id' => 'required'
         ]);
 
+        $update = \DB::table('schedules')
+                ->where('user_id',\Auth::user()->id)
+                ->where('schedule_type','Examination')
+                ->update(['isConfirmed' => 2]);
+
         return Answers::create([
             'choice_id' => $request['choice_id'],
             'user_id' => \Auth::user()->id,
