@@ -24,6 +24,7 @@
                         <td>{{schedule.date.trim() | moment("dddd, MMMM D, YYYY")}}</td>
                         <td>{{schedule.start_time.trim() | moment(" HH:mm a")}} to {{schedule.end_time | moment(" HH:mm a")}}</td>
                         <td v-if="schedule.isConfirmed == 1"><span class="label label-success">Approved</span></td>
+                        <td v-else-if="schedule.isConfirmed == 2"><span class="label label-info">Finished Exam in Mobile</span></td>
                         <td v-else><span class="label label-danger">Pending</span></td>
                         <td>
                            <a href="#"  data-toggle="modal" data-target="#exampleModal" @click="editModal(schedule)">

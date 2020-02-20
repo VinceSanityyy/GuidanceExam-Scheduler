@@ -16741,6 +16741,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -78330,6 +78331,12 @@ var render = function() {
                             _vm._v("Approved")
                           ])
                         ])
+                      : schedule.isConfirmed == 2
+                      ? _c("td", [
+                          _c("span", { staticClass: "label label-info" }, [
+                            _vm._v("Finished Exam in Mobile")
+                          ])
+                        ])
                       : _c("td", [
                           _c("span", { staticClass: "label label-danger" }, [
                             _vm._v("Pending")
@@ -99448,8 +99455,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Vince\Desktop\scheduler\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Vince\Desktop\scheduler\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/GuidanceExam-Scheduler/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/GuidanceExam-Scheduler/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
