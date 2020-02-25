@@ -18,6 +18,7 @@ class ScheduleController extends Controller
         // return schedule::all();
         $schedules = \DB::table('schedules')
                     ->where('isConfirmed',1)
+                    ->where('schedules.schedule_type','Consultation')
                     ->get();
         return response()->json($schedules);
     }
