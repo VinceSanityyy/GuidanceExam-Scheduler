@@ -16400,6 +16400,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -77905,7 +77912,35 @@ var render = function() {
                 [
                   _c("option", [_vm._v("Consultation")]),
                   _vm._v(" "),
-                  _c("option", [_vm._v("Examination")])
+                  _c("option", [
+                    _vm._v("Examination - College Adjustment Scale")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Examination - Standard Progressive Matrices")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Examination - 16 Personality Factor Test")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Examination - Beck's Depression Inventory")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Examination - Filipino Work Values Scale")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("Examination - IQ Test")]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Examination - Basic Personality Inventory")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", [
+                    _vm._v("Examination - BarOn Emotional Quotient Inventory")
+                  ])
                 ]
               )
             ]),

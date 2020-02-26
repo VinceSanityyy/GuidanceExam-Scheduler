@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Answers;
+use App\schedule;
 class QuestionsController extends Controller
 {
     public function viewQuestionsWithChoices(Request $request){
@@ -115,4 +116,34 @@ class QuestionsController extends Controller
     //     return response()->json($all);
     // }
 
+
+    public function createSchedule (Request $request){
+        if($request['type'] == 'Examination - College Adjustment Scale'
+        ||$request['type'] == 'Examination - Standard Progressive Matrices'
+        ||$request['type'] == 'Examination - 16 Personality Factor Test'
+        ||$request['type'] == "Examination - Beck's Depression Inventory"
+        ||$request['type'] == 'Examination - Filipino Work Values Scale'
+        ||$request['type'] == 'Examination - IQ Test'
+        ||$request['type'] == 'Examination - Basic Personality Inventory'
+        ||$request['type'] == 'Examination - BarOn Emotional Quotient Inventory'
+        ){
+            return schedule::create([
+                'schedule_type' => $request['type'],
+                'start_date' => $request['date'],
+                'end_date' => $request['date'],
+                // 'id_number' => $request['id_number'],
+                'user_id' => \Auth::user()->id,
+                'isConfirmed' => 0
+               ]);
+        }
+
+        return schedule::create([
+            'schedule_type' => $request['type'],
+            'start_date' => $request['date'].' '.$request['from'],
+            'end_date' => $request['date'].' '.$request['to'],
+            // 'id_number' => $request['id_number'],
+            'user_id' => \Auth::user()->id,
+            'isConfirmed' => 0
+           ]);
+    }
 }

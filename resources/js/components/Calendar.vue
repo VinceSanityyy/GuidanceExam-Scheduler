@@ -14,7 +14,14 @@
                   <label>Type</label>
                   <select  v-model="form.type" class="form-control">
                      <option>Consultation</option>
-                     <option>Examination</option>
+                     <option>Examination - College Adjustment Scale</option>
+                     <option>Examination - Standard Progressive Matrices</option>
+                     <option>Examination - 16 Personality Factor Test</option>
+                     <option>Examination - Beck's Depression Inventory</option>
+                     <option>Examination - Filipino Work Values Scale</option>
+                     <option>Examination - IQ Test</option>
+                     <option>Examination - Basic Personality Inventory</option>
+                     <option>Examination - BarOn Emotional Quotient Inventory</option>
                   </select>
                </div>
                <div class="form-group">

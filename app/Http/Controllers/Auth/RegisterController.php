@@ -58,6 +58,7 @@ class RegisterController extends Controller
             'age' => 'required',
             'course' => 'required',
             'sex' => 'required',
+            'yearlevel' => 'required',
             'mobile' => ['required','unique:users'],
         ]);
     }
@@ -70,6 +71,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
+        // dd($data['yearlevel']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -80,6 +83,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'sex' =>$data['sex'],
             'mobile' =>$data['mobile'],
+            'yearlevel' =>$data['yearlevel'],
             'api_token' => \Str::random(60),
         ]);
     }
