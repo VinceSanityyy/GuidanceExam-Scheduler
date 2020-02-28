@@ -133,7 +133,8 @@ class QuestionsController extends Controller
                 'end_date' => $request['date'],
                 // 'id_number' => $request['id_number'],
                 'user_id' => \Auth::user()->id,
-                'isConfirmed' => 0
+                'isConfirmed' => 0,
+                'type' => $request['typeOfSched'],
                ]);
         }
 
@@ -143,7 +144,8 @@ class QuestionsController extends Controller
             'end_date' => $request['date'].' '.$request['to'],
             // 'id_number' => $request['id_number'],
             'user_id' => \Auth::user()->id,
-            'isConfirmed' => 0
+            'isConfirmed' => 0,
+            'type' => $request['typeOfSched'],
            ]);
     }
 }

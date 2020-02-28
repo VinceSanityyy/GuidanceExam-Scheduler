@@ -12,5 +12,6 @@ class schedule extends Model
         'start_date',
         'end_date',
         'isConfirmed',
+	'type',
     ];
 }
