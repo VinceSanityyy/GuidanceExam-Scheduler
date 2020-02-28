@@ -63,8 +63,8 @@ class ScheduleController extends Controller
 
         return schedule::create([
             'schedule_type' => $request['type'],
-            'start_date' => $request['date'].' '.$request['from'],
-            'end_date' => $request['date'].' '.$request['to'],
+            'start_date' => $request['date'].' '.rtrim($request['from']),
+            'end_date' => $request['date'].' '.rtrim($request['to']),
             // 'id_number' => $request['id_number'],
             'user_id' => \Auth::user()->id,
             'isConfirmed' => 0

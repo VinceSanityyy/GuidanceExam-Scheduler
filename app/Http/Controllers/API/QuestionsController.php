@@ -57,7 +57,7 @@ class QuestionsController extends Controller
 
         $update = \DB::table('schedules')
                 ->where('user_id',\Auth::user()->id)
-                ->where('schedule_type','Examination')
+                ->where('schedule_type','LIKE','%Examination%')
                 ->update(['isConfirmed' => 2]);
 
         return Answers::create([
@@ -88,7 +88,7 @@ class QuestionsController extends Controller
                     \DB::raw('sum(choices.value) as score'))
                     ->join('users','users.id','answers.user_id')
                     ->join('schedules','schedules.user_id','answers.user_id')
-                    ->where('schedules.schedule_type','Examination')
+                    ->where('schedules.schedule_type','LIKE','%Examination%')
                     ->where('answers.user_id',\Auth::user()->id)
                     ->get();
         return response()->json($all);
