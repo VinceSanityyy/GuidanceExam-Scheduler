@@ -39,5 +39,7 @@ Route::group([ 'prefix' => 'auth'], function (){
         //get Personal score with details
         // Route::get('/getPersonalScoreWithDetails','API\QuestionsController@personalScoreWithDetails');
 
+        //Create Schedule
+        Route::post('/createSchedule','API\QuestionsController@createSchedule');
     });
 }); 

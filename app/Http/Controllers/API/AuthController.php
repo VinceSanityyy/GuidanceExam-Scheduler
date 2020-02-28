@@ -16,10 +16,14 @@ class AuthController extends ResponseController
     public function signup(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password'
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+            'id_number' => ['required', 'string','unique:users'],
+            'age' => 'required',
+            'course' => 'required',
+            'sex' => 'required',
+            'mobile' => ['required','unique:users'],
         ]);
 
         if($validator->fails()){
@@ -28,9 +32,11 @@ class AuthController extends ResponseController
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
+        $user = User::create($input,['api_token' => \Str::random(60)]);
+
+        
         if($user){
-            $success['token'] =  $user->createToken('token')->accessToken;
+            // $success['token'] =  $user->createToken('token')->accessToken;
             $success['message'] = "Registration successfull..";
             return $this->sendResponse($success);
         }
