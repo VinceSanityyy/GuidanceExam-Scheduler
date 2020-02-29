@@ -77,4 +77,28 @@ class HomeController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
     }
+
+    public function countPending(){
+        $pending = \DB::table('schedules')
+                    ->where('isConfirmed',0)
+                    ->count();
+
+       return response()->json($pending);           
+    }
+
+    public function countPendingUsers(){
+        $pending = \DB::table('users')
+                    ->where('isConfirmed',0)
+                    ->count();
+
+       return response()->json($pending);           
+    }
+
+    public function countTotalUsers(){
+        $pending = \DB::table('users')
+                    ->where('isConfirmed',1)
+                    ->count();
+
+       return response()->json($pending);           
+    }
 }

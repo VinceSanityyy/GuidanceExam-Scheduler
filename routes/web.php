@@ -48,4 +48,13 @@ Route::get('/getSchedulesType/{date?}','ScheduleController@getSchedulesByType');
 //Get schedules by gender
 Route::get('/getSchedulesGender/{date?}','ScheduleController@getSchedulesByGender');
 
+//count total pending
+Route::get('/countPending','HomeController@countPending');
+
+//count total pending users
+Route::get('/countPendingUsers','HomeController@countPendingUsers');
+
+//count total  users
+Route::get('/countUsers','HomeController@countTotalUsers');
+
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );
