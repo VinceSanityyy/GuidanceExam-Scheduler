@@ -125,7 +125,7 @@
           <router-link to="/schedules" class="nav-link" > <i class="fa fa-pause "></i> <span>Schedules List</span> </router-link>
         </li>
         <li class="treeview">
-          <router-link to="/users" class="nav-link" > <i class="fa fa-file-excel-o"></i> <span>Reports</span> </router-link>
+          <router-link to="/reports" class="nav-link" > <i class="fa fa-file-excel-o"></i> <span>Reports</span> </router-link>
         </li>
           @endif
           <li class="treeview">

@@ -62,7 +62,12 @@
                                     <option value = "BSIT">Bachelor of Science in Information Technology</option>
                                     <option value = "BSCS">Bachelor of Science in Computer Science</option>
                                     <option value = "BSIS">Bachelor of Science in Information Systems</option>
-                                  </select>
+                                    <option value = "BSBA">Bachelor of Science in Business Administration</option>
+                                    <option value = "BSTM">Bachelor of Science in Tourism Management</option>
+                                    <option value = "BSHRM">Bachelor of Science in Hotel and Restaurant Management</option>
+                                    <option value = "BSC">Bachelor of Science in Criminology</option>
+                                    <option value = "ENG'G">Bachelor of Science in Engineering</option>
+                                </select>
                                   @error('course')
                                           <span class="invalid-feedback" role="alert">
                                               <strong>{{ $message }}</strong>
@@ -75,11 +80,11 @@
                             <label class="col-md-4 col-form-label text-md-right">Year Level</label>
                             <div class="col-md-6">
                                 <select id="yearlevel"required class="form-control @error('yearlevel') is-invalid @enderror" name="yearlevel" value="{{ old('yearlevel') }}" >
-                                    <option value = "1">First Year</option>
-                                    <option value = "2">Second Year</option>
-                                    <option value = "3">Third Year</option>
-                                    <option value = "4">Fourth Year</option>
-                                    <option value = "5">Fifth Year</option>
+                                    <option value = "1st">First Year</option>
+                                    <option value = "2nd">Second Year</option>
+                                    <option value = "3rd">Third Year</option>
+                                    <option value = "4th">Fourth Year</option>
+                                    <option value = "5th">Fifth Year</option>
                                   </select>
                                   @error('yearlevel')
                                           <span class="invalid-feedback" role="alert">
@@ -108,8 +113,8 @@
                             <label class="col-md-4 col-form-label text-md-right">Gender</label>
                             <div class="col-md-6">
                                 <select id="sex"required class="form-control @error('sex') is-invalid @enderror" name="sex" value="{{ old('sex') }}" >
-                                    <option value = "male">Male</option>
-                                    <option value = "female">Female</option>
+                                    <option value = "Male">Male</option>
+                                    <option value = "Female">Female</option>
                                 
                                   </select>
                                   @error('course')

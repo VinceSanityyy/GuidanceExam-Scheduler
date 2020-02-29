@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\schedule;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class ScheduleController extends Controller
 {
     /**
@@ -161,5 +161,71 @@ class ScheduleController extends Controller
 
         
         $schedule_id->save($request->all());
+    }
+
+
+    public function getSchedulesByYearLevel(Request $request){
+        $date = $request->date;
+        $formatted_year = Carbon::parse($date)->format('yy');
+        $formatted_month = Carbon::parse($date)->format('m');
+        $schedules = \DB::table('schedules')
+                    ->join('users','users.id','=','schedules.user_id')
+                    ->select('users.yearlevel as label',\DB::raw("COUNT('schedules.*') as value"))
+                    ->groupBy('users.yearlevel')
+                    ->whereYear('schedules.created_at', $formatted_year)
+                    ->whereMonth('schedules.created_at', $formatted_month)
+                    ->get();
+        // dd($formatted_year);
+        return response()->json($schedules);        
+    }
+
+    public function getSchedulesByCourse(Request $request){
+        $date = $request->date;
+        $formatted_year = Carbon::parse($date)->format('yy');
+        $formatted_month = Carbon::parse($date)->format('m');
+
+        $schedules = \DB::table('schedules')
+        ->join('users','users.id','=','schedules.user_id')
+        ->select('users.course as label',\DB::raw("COUNT('schedules.*') as value"))
+        ->groupBy('users.course')
+        ->whereYear('schedules.created_at', $formatted_year)
+        ->whereMonth('schedules.created_at', $formatted_month)
+        ->get();
+
+        // dd($formatted_year);
+        return response()->json($schedules);
+    }
+
+    public function getSchedulesByType(Request $request){
+        $date = $request->date;
+        $formatted_year = Carbon::parse($date)->format('yy');
+        $formatted_month = Carbon::parse($date)->format('m');
+
+        $schedules = \DB::table('schedules')
+        ->select('schedules.type as label',\DB::raw("COUNT('schedules.*') as value"))
+        ->groupBy('schedules.type')
+        ->whereYear('schedules.created_at', $formatted_year)
+        ->whereMonth('schedules.created_at', $formatted_month)
+        ->get();
+
+        // dd($formatted_year);
+        return response()->json($schedules);
+    }
+
+    public function getSchedulesByGender(Request $request){
+        $date = $request->date;
+        $formatted_year = Carbon::parse($date)->format('yy');
+        $formatted_month = Carbon::parse($date)->format('m');
+
+        $schedules = \DB::table('schedules')
+        ->join('users','users.id','=','schedules.user_id')
+        ->select('users.sex as label',\DB::raw("COUNT('schedules.*') as value"))
+        ->groupBy('users.sex')
+        ->whereYear('schedules.created_at', $formatted_year)
+        ->whereMonth('schedules.created_at', $formatted_month)
+        ->get();
+
+        // dd($formatted_year);
+        return response()->json($schedules);
     }
 }

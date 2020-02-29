@@ -29,11 +29,14 @@
         "@fullcalendar/interaction": "^4.3.0",
         "@fullcalendar/timegrid": "^4.3.0",
         "@fullcalendar/vue": "^4.3.1",
+        "fusioncharts": "^3.15.1",
         "sweetalert2": "^9.6.0",
         "vform": "^1.0.1",
         "vue-bootstrap-datetimepicker": "^5.0.1",
+        "vue-fusioncharts": "^3.0.4",
         "vue-loading-overlay": "^3.3.0",
         "vue-moment": "^4.1.0",
+        "vue-monthly-picker": "^0.2.8",
         "vue-router": "^3.1.5",
         "vue-simple-calendar": "^4.3.2"
     }

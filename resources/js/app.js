@@ -15,12 +15,17 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 // Init plugin
 
+import VueFusionCharts from 'vue-fusioncharts';
+// import FusionCharts from 'fusioncharts';
+
 Vue.use(Loading);
 Vue.use(VueRouter)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.use(require('vue-moment'));
 Vue.use(datePicker);
+
+// Vue.use(VueFusionCharts, FusionCharts);
 
 window.swal = swal;
 window.Form = Form;
@@ -42,6 +47,7 @@ const routes = [
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/schedules', component: require('./components/Schedules.vue').default },
+     { path: '/reports', component: require('./components/Reports.vue').default },
   ]
 
 const router = new VueRouter({

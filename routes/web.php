@@ -36,4 +36,16 @@ Route::put('/updateSchedule/{id}','ScheduleController@updateSchedule');
 //Get all scores in every user
 Route::get('/getAllScores','QuestionController@getAllScores');
 
+// Get schedules by year level
+Route::get('/getSchedulesYear/{date?}','ScheduleController@getSchedulesByYearLevel');
+
+//Get schedules by course
+Route::get('/getSchedulesCourse/{date?}','ScheduleController@getSchedulesByCourse');
+
+//Get schedules by type
+Route::get('/getSchedulesType/{date?}','ScheduleController@getSchedulesByType');
+
+//Get schedules by gender
+Route::get('/getSchedulesGender/{date?}','ScheduleController@getSchedulesByGender');
+
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );
