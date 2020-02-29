@@ -9,9 +9,9 @@
                </div>
             </div>
             <div class="box-body">
-               <table class="table table-hover no-padding">
-                  <tbody>
-                     <tr>
+               <table id="myTable" class="table table-hover no-padding">
+                     <thead>
+                           <tr>
                         <th>Id Number</th>
                         <th>Name</th>
                         <th>Gender</th>
@@ -19,6 +19,8 @@
                         <th>Current Status</th>
                         <th>Actions</th>
                      </tr>
+                     </thead>
+                      <tbody>
                      <tr v-for="user in users" :key="user.id">
                         <td>{{user.id_number}}</td>
                         <td>{{user.name}}</td>
@@ -109,6 +111,7 @@
    </div>
 </template>
 <script>
+import datatables from 'datatables'
    export default {
        data(){
            return{
@@ -128,11 +131,17 @@
                 axios.get('/getUsers')
                  .then((res)=>{
                    this.users = res.data
+                    this.myTable()
                  })
                  .catch((e)=>{
                    console.log(e)
                  })
            },
+            myTable(){
+               $(document).ready( function () {
+                     $('#myTable').DataTable();
+                  });
+               },
              newModal(){
             this.editmode = false
             this.form.reset()

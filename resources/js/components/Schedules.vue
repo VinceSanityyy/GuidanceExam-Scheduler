@@ -6,8 +6,8 @@
                <h3 class="box-title">Schedules</h3>
             </div>
             <div class="box-body">
-               <table class="table table-hover no-padding">
-                  <tbody>
+               <table id="myTable" class="table table-hover no-padding">
+                  <thead>
                      <tr>
                         <th>Id Number</th>
                         <th>Name</th>
@@ -17,12 +17,14 @@
                         <th>Current Status</th>
                         <th>Actions</th>
                      </tr>
+                  </thead>
+                  <tbody>
                      <tr v-for="schedule in schedules" :key="schedule.scid">
                         <td>{{schedule.id_number}}</td>
                         <td>{{schedule.name}}</td>
                         <td>{{schedule.schedule_type}}</td>
                         <td>{{schedule.date.trim() | moment("dddd, MMMM D, YYYY")}}</td>
-                        <td>{{schedule.start_time.trim() | moment(" HH:mm a")}} to {{schedule.end_time | moment(" HH:mm a")}}</td>
+                        <td>{{schedule.start_time.trim() | moment(" hh:mm a")}} - {{schedule.end_time | moment(" hh:mm a")}}</td>
                         <td v-if="schedule.isConfirmed == 1"><span class="label label-success">Approved</span></td>
                         <td v-else-if="schedule.isConfirmed == 2"><span class="label label-info">Finished Exam in Mobile</span></td>
                         <td v-else><span class="label label-danger">Pending</span></td>
@@ -91,6 +93,7 @@
    </div>
 </template>
 <script>
+import datatables from 'datatables'
    export default {
        data(){
            return{
@@ -109,11 +112,17 @@
                 axios.get('/getAllSchedule')
                  .then((res)=>{
                    this.schedules = res.data
+                   this.myTable()
                  })
                  .catch((e)=>{
                    console.log(e)
                  })
            },
+             myTable(){
+               $(document).ready( function () {
+                     $('#myTable').DataTable();
+                  });
+               },
          editModal(schedule){
             this.editmode = true
             this.form.reset()

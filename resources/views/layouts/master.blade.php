@@ -164,6 +164,9 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<link rel="stylesheet" href="{{asset('layout/dist/css/jquery.dataTables.css')}}">
+
+{{-- <link rel="stylesheet" href="{{asset('layout/dist/css/jquery.dataTables.min.css')}}"> --}}
 
 <!-- jQuery 3 -->
 <script src="{{asset('layout/bower_components/jquery/dist/jquery.min.js')}}"></script>
