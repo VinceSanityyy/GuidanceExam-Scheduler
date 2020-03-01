@@ -59,14 +59,14 @@
                             <label class="col-md-4 col-form-label text-md-right">Select Course</label>
                             <div class="col-md-6">
                                 <select id="course"required class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('age') }}" >
-                                    <option value = "BSIT">Bachelor of Science in Information Technology</option>
-                                    <option value = "BSCS">Bachelor of Science in Computer Science</option>
-                                    <option value = "BSIS">Bachelor of Science in Information Systems</option>
-                                    <option value = "BSBA">Bachelor of Science in Business Administration</option>
-                                    <option value = "BSTM">Bachelor of Science in Tourism Management</option>
-                                    <option value = "BSHRM">Bachelor of Science in Hotel and Restaurant Management</option>
-                                    <option value = "BSC">Bachelor of Science in Criminology</option>
-                                    <option value = "ENG'G">Bachelor of Science in Engineering</option>
+                                    <option value = "BSIT/CS">BSIT/CS</option>
+                                    <option value = "BSED/BEED">BSED/BEED</option>
+                                    <option value = "BSBA">BSBA</option>
+                                    <option value = "BSAT/BSA">BSAT/BAS</option>
+                                    <option value = "BSHRM/TM">BSHRM/TM</option>
+                                    <option value = "BSCJ">BSCJ</option>
+                                    <option value = "ENG'G">ENG'G</option>
+                                    <option value = "DASE">DASE</option>
                                 </select>
                                   @error('course')
                                           <span class="invalid-feedback" role="alert">
@@ -99,7 +99,7 @@
                             <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number') }}</label>
 
                             <div class="col-md-6">
-                                <input  id="mobile" type="number"class="form-control no-arrow @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
+                                <input value="63"  id="mobile" type="number"class="form-control no-arrow @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
 
                                 @error('mobile')
                                     <span class="invalid-feedback" role="alert">

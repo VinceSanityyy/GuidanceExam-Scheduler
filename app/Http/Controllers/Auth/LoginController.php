@@ -23,9 +23,9 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if ($user->isConfirmed === 0) {
+        if ($user->id_number != 0) {
             Auth::logout($user);
-            abort(403, 'Account Not Activated Yet');
+            abort(403, 'User available for mobile use only.');
         }
     }
 
