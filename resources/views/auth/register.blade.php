@@ -168,7 +168,7 @@
                                 <button style="background-color: #8B0000; color: white" type="submit" class="btn">
                                     {{ __('Register') }}
                                 </button>
-                                <a style="background-color: #8B0000; color: white" class="btn" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                {{-- <a style="background-color: #8B0000; color: white" class="btn" href="{{ route('login') }}">{{ __('Login') }}</a> --}}
                             </div>
                         
                             
