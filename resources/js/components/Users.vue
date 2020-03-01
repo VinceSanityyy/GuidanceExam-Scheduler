@@ -49,7 +49,7 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel">Add User</h4>
+                  <h4 class="modal-title" id="exampleModalLabel">Add Student</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -68,19 +68,7 @@
                            />
                         <has-error :form="form" field="name"></has-error>
                      </div>
-                     <div class="form-group">
-                        <label>ID Number</label>
-                        <input
-                           v-model="form.id_number"
-                           type="text"
-                           name="id_number"
-                           placeholder="Id Number"
-                           class="form-control"
-                           :class="{ 'is-invalid': form.errors.has('id_number') }"
-                           />
-                        <has-error :form="form" field="id_number"></has-error>
-                     </div>
-                     <div class="form-group">
+                      <div class="form-group">
                         <label>Email</label>
                         <input
                            v-model="form.email"
@@ -91,6 +79,75 @@
                            :class="{ 'is-invalid': form.errors.has('email') }"
                            />
                         <has-error :form="form" field="email"></has-error>
+                     </div>
+                       <div class="col-md-6 form-group">
+                        <label>ID Number</label>
+                        <input
+                           v-model="form.id_number"
+                           type="text"
+                           
+                           name="id_number"
+                           placeholder="Id Number"
+                           class="form-control"
+                           :class="{ 'is-invalid': form.errors.has('id_number') }"
+                           />
+                        <has-error :form="form" field="id_number"></has-error>
+                     </div>
+                  
+                        <div class="col-md-6 form-group">
+                        <label>Age</label>
+                        <input
+                           v-model="form.age"
+                           type="number"
+                           name="age"
+                           min="0"
+                           placeholder="Age"
+                           class="form-control"
+                           :class="{ 'is-invalid': form.errors.has('age') }"
+                           />
+                        <has-error :form="form" field="age"></has-error>
+                     </div>
+                        <div class="col-md-6 form-group">
+                        <label>Mobile Number</label>
+                        <input
+                           v-model="form.mobile"
+                           type="text"
+                           name="mobile"
+                           placeholder="Mobile Number"
+                           class="form-control"
+                           :class="{ 'is-invalid': form.errors.has('mobile') }"
+                           />
+                        <has-error :form="form" field="mobile"></has-error>
+                     </div>
+                        <div class="col-md-6 form-group">
+                        <label>Course</label>
+                           <select  v-model="form.course"  id="course" class="form-control" name="course" >
+                                    <option value = "BSIT/CS">BSIT/CS</option>
+                                    <option value = "BSED/BEED">BSED/BEED</option>
+                                    <option value = "BSBA">BSBA</option>
+                                    <option value = "BSAT/BSA">BSAT/BAS</option>
+                                    <option value = "BSHRM/TM">BSHRM/TM</option>
+                                    <option value = "BSCJ">BSCJ</option>
+                                    <option value = "ENG'G">ENG'G</option>
+                                    <option value = "DASE">DASE</option>
+                                </select>
+                     </div>
+                        <div class="col-md-6 form-group">
+                        <label>Year Level</label>
+                          <select  v-model="form.yearlevel"  id="yearlevel" class="form-control " name="yearlevel" >
+                                    <option value = "1st">First Year</option>
+                                    <option value = "2nd">Second Year</option>
+                                    <option value = "3rd">Third Year</option>
+                                    <option value = "4th">Fourth Year</option>
+                                    <option value = "5th">Fifth Year</option>
+                                  </select>
+                     </div>
+                        <div class="col-md-6 form-group">
+                        <label>Gender</label>
+                         <select id="sex"  v-model="form.sex"  class="form-control" name="sex">
+                                    <option value = "Male">Male</option>
+                                    <option value = "Female">Female</option>
+                                  </select>
                      </div>
                      <div class="form-group">
                         <label>Status</label>
@@ -125,6 +182,11 @@ import datatables from 'datatables'
                    id_number:'',
                    isConfirmed:'',
                    email:'',
+                   mobile:'',
+                   age:'',
+                   course:'',
+                   sex:''
+
                })
            }
        },
@@ -146,6 +208,7 @@ import datatables from 'datatables'
                },
              newModal(){
             this.editmode = false
+            this.form.clear()
             this.form.reset()
             $('#exampleModal').modal('show')
           },
@@ -156,6 +219,7 @@ import datatables from 'datatables'
                 $('#exampleModal').modal('hide');
                 $(".modal-backdrop").remove();
                 this.getUsers()
+               
                 console.log(data)
               })
           },

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-
+use Flash;
 class RegisterController extends Controller
 {
     /*
@@ -93,7 +93,9 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-
-        return redirect($this->redirectPath())->with('message', 'Account Successfully Registered');
+        // Auth::logout($user);
+        // return redirect('/welcome')->with('message', 'Account Successfully Registered');
+        abort(403, 'Wait for the admin to confirm your account for mobile use.');
+        // $request->session()->flash('alert-success', 'Registration successful');
     }
 }

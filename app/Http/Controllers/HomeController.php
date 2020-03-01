@@ -52,6 +52,9 @@ class HomeController extends Controller
             'email' => $request['email'],
             'age' => $request['age'],
             'course' => $request['course'],
+            'sex' => $request['sex'],
+            'yearlevel' => $request['yearlevel'],
+            'mobile' => $request['mobile'],
             'password' => \Hash::make('12345678')
            ]);
     }
