@@ -94,9 +94,10 @@
             calendarPlugins: [
                dayGridPlugin,
                timeGridPlugin,
-               interactionPlugin
+               interactionPlugin,
             ],
             calendarWeekends: true,
+            handleWindowResize: true,
             calendarEvents: [ // initial event data
                
             ],

@@ -41,13 +41,14 @@ window.toast = toast;
 
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('calendar-webview', require('./components/CalendarWebview.vue').default);
 
 const routes = [
     { path: '/calendar', component: require('./components/Calendar.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/schedules', component: require('./components/Schedules.vue').default },
-     { path: '/reports', component: require('./components/Reports.vue').default },
+    { path: '/reports', component: require('./components/Reports.vue').default },
   ]
 
 const router = new VueRouter({

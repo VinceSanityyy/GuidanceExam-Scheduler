@@ -101,4 +101,8 @@ class HomeController extends Controller
 
        return response()->json($pending);           
     }
+
+    public function calendarWebview(){
+        return view ('calendar');
+    }
 }

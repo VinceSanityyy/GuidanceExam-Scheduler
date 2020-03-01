@@ -57,4 +57,6 @@ Route::get('/countPendingUsers','HomeController@countPendingUsers');
 //count total  users
 Route::get('/countUsers','HomeController@countTotalUsers');
 
+Route::get('/webview','HomeController@calendarWebview');
+
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );
