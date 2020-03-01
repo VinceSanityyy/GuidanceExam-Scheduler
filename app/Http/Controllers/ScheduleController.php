@@ -41,6 +41,11 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'type' => 'required',
+            'user_id' => 'required',
+            'typeOfSched' => 'required',
+           ]);
 
         if($request['type'] == 'Examination - College Adjustment Scale'
         ||$request['type'] == 'Examination - Standard Progressive Matrices'
@@ -56,7 +61,8 @@ class ScheduleController extends Controller
                 'start_date' => $request['date'],
                 'end_date' => $request['date'],
                 // 'id_number' => $request['id_number'],
-                'user_id' => \Auth::user()->id,
+                'user_id' => $request['user_id'],
+                'type' => $request['typeOfSched'],
                 'isConfirmed' => 0
                ]);
         }
@@ -66,7 +72,8 @@ class ScheduleController extends Controller
             'start_date' => $request['date'].' '.rtrim($request['from']),
             'end_date' => $request['date'].' '.rtrim($request['to']),
             // 'id_number' => $request['id_number'],
-            'user_id' => \Auth::user()->id,
+            'user_id' => $request['user_id'],
+            'type' => $request['typeOfSched'],
             'isConfirmed' => 0
            ]);
       

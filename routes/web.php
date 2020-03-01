@@ -62,6 +62,7 @@ Route::get('/countPendingUsers','HomeController@countPendingUsers');
 //count total  users
 Route::get('/countUsers','HomeController@countTotalUsers');
 
-
+// getUsersSchedule
+Route::get('/getUsersSchedule','HomeController@getUsersSchedule');
 
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );

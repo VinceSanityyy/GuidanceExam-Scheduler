@@ -37,6 +37,15 @@ class HomeController extends Controller
 
     }
 
+    public function getUsersSchedule(){
+        $users = \DB::table('users')
+        ->where('id_number','!=',0)
+        ->where('isConfirmed',1)
+        ->get();
+
+        return response()->json($users);
+    }
+
     public function addUser(Request $request){
         $this->validate($request, [
             'name' => 'required',
