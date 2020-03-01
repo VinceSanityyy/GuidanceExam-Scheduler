@@ -1,6 +1,6 @@
 <template>
    <div class="row">
-      <div class="col-md-3">
+      <!-- <div class="col-md-3">
          <div class="box box-success">
             <div class="box-header with-border">
                <h3 class="box-title">Add Event</h3>
@@ -55,8 +55,8 @@
             </div>
             </form>
          </div>
-      </div>
-      <div class="col-md-9">
+      </div> -->
+      <div class="col-md-12">
          <div class="box box-success">
             <div class="box-header with-border">
             <h3 class="box-title">Calendar</h3>

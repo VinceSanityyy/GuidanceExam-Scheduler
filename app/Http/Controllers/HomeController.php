@@ -29,7 +29,9 @@ class HomeController extends Controller
     }
 
     public function getUsers(){
-        $users = \DB::table('users')->get();
+        $users = \DB::table('users')
+                ->where('id_number','!=',0)
+                ->get();
 
         return response()->json($users);
 

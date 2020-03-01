@@ -3,7 +3,7 @@
       <div class="col-md-12">
          <div class="box box-success">
             <div class="box-header with-border">
-               <h3 class="box-title">List of Users</h3>
+               <h3 class="box-title">List of Students</h3>
                <div class="box-tools">
                   <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Add new<i class="fa fa-plus"></i></button>
                </div>
@@ -11,11 +11,12 @@
             <div class="box-body">
                <table id="myTable" class="table table-hover no-padding">
                      <thead>
-                           <tr>
+                     <tr>
                         <th>Id Number</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Email</th>
+                        <th>Course</th>
                         <th>Current Status</th>
                         <th>Actions</th>
                      </tr>
@@ -26,6 +27,7 @@
                         <td>{{user.name}}</td>
                         <td>{{user.sex}}</td>
                         <td>{{user.email}}</td>
+                        <td>{{user.course}}</td>
                         <td v-if="user.isConfirmed == 1"><span class="label label-success">Approved</span></td>
                         <td v-else><span class="label label-danger">Pending</span></td>
                         <td>
