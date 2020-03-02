@@ -8,10 +8,29 @@
                </h3>
                <div class="box-body">
                     <div class="col-md-12">
-                        <div class="col-md-6 form-group">
-                        <label>Filter</label>
-                          <date-picker @dp-change="getSchedulesYear(),getSchedulesCourse(),getSchedulesType(),getSchedulesGender()" name="date" id="date" v-model="date" :config="opt" ></date-picker>
+                        <div class="col-md-4 form-group">
+                        <label>From</label>
+                          <date-picker 
+                          name="date" id="date" v-model="date_from" 
+                          :config="opt" ></date-picker>
                           </div>
+                            <div class="col-md-4 form-group">
+                            <label>To</label>
+                          <date-picker
+                          name="date" id="date" v-model="date_to" 
+                          :config="opt" ></date-picker>
+                          </div>
+                          <div class="col-md-4">
+                              <br>
+                                <button @click="
+                                getSchedulesYear(),
+                                getSchedulesGender(),
+                                getSchedulesType(),
+                                getSchedulesCourse()"  class="btn btn-primary btn-block">Apply Filter</button>
+                          </div>
+                          <!-- <div class="col-md-2">
+                                <button  class="btn btn-primary btn-block">Clear Filter</button>
+                          </div> -->
                     </div>
                   <div class="col-md-6">
                      <div class="box box-success">
@@ -92,11 +111,17 @@
     export default {
         data(){
             return{
-                date: new Date(),
+                date_from: new Date(),
                 opt:{
                     showClear: true,
                     useCurrent: false,
-                    format: 'YYYY-MM'
+                    format: 'YYYY-MM-D'
+                },
+                date_to: new Date(),
+                opt:{
+                    showClear: true,
+                    useCurrent: false,
+                    format: 'YYYY-MM-D'
                 },
                 chartYearLevel:{
                     type: 'column2d',
@@ -111,7 +136,7 @@
                             theme: 'fusion',
                             decimals: 1,
                             showpercentagevalues:1,
-                            palettecolors: "#3763db"
+                            palettecolors: "#1aa308,#ede909,#cc210e,#2e25db,#000000"
                         },
                         data:[]
                     }
@@ -129,7 +154,7 @@
                                 theme: 'fusion',
                                 decimals: 1,
                                 showpercentagevalues:1,
-                                palettecolors: "#3763db"
+                                palettecolors: "#4e4f54,#2e25db,#ede909,#1aa308,##440b73,#cc210e,#e3701e,#000000"
                             },
                             data:[]
                         }
@@ -147,7 +172,7 @@
                                 theme: 'fusion',
                                 decimals: 1,
                                 showpercentagevalues:1,
-                                palettecolors: "#3763db"
+                                palettecolors: "#cc210e,#2e25db,#ede909"
                             },
                             data:[]
                         }
@@ -165,7 +190,7 @@
                                 theme: 'fusion',
                                 decimals: 1,
                                 showpercentagevalues:1,
-                                palettecolors: "#3763db"
+                                palettecolors: "#e81a5b,#2e25db"
                             },
                             data:[]
                         }
@@ -180,7 +205,9 @@
         },
         methods:{
             getSchedulesYear(){
-                axios.get('/getSchedulesYear?date='+this.date)
+                let params = { date_from: this.date_from, date_to: this.date_to };
+                let paramString = new URLSearchParams(params);
+                axios.get(`/getSchedulesYear?${paramString.toString()}`)
                     .then((res)=>{
                         this.chartYearLevel.dataSource.data = []
                         res.data.forEach(val=>{
@@ -189,7 +216,9 @@
                     })
             },
             getSchedulesCourse(){
-                  axios.get('/getSchedulesCourse?date='+this.date)
+                let params = { date_from: this.date_from, date_to: this.date_to };
+                let paramString = new URLSearchParams(params);
+                  axios.get(`/getSchedulesCourse?${paramString.toString()}`)
                     .then((res)=>{
                         this.chartCourse.dataSource.data = []
                         res.data.forEach(val=>{
@@ -198,7 +227,9 @@
                     })
             },
             getSchedulesType(){
-                  axios.get('/getSchedulesType?date='+this.date)
+                let params = { date_from: this.date_from, date_to: this.date_to };
+                let paramString = new URLSearchParams(params);
+                  axios.get(`/getSchedulesType?${paramString.toString()}`)
                     .then((res)=>{
                         this.chartSchedType.dataSource.data = []
                         res.data.forEach(val=>{
@@ -207,7 +238,9 @@
                     })
             },
             getSchedulesGender(){
-                  axios.get('/getSchedulesGender?date='+this.date)
+                let params = { date_from: this.date_from, date_to: this.date_to };
+                let paramString = new URLSearchParams(params);
+                  axios.get(`/getSchedulesGender?${paramString.toString()}`)
                     .then((res)=>{
                         this.chartSchedGender.dataSource.data = []
                         res.data.forEach(val=>{

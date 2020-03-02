@@ -42,16 +42,16 @@ Route::put('/updateSchedule/{id}','ScheduleController@updateSchedule');
 Route::get('/getAllScores','QuestionController@getAllScores');
 
 // Get schedules by year level
-Route::get('/getSchedulesYear/{date?}','ScheduleController@getSchedulesByYearLevel');
+Route::get('/getSchedulesYear','ScheduleController@getSchedulesByYearLevel');
 
 //Get schedules by course
-Route::get('/getSchedulesCourse/{date?}','ScheduleController@getSchedulesByCourse');
+Route::get('/getSchedulesCourse','ScheduleController@getSchedulesByCourse');
 
 //Get schedules by type
-Route::get('/getSchedulesType/{date?}','ScheduleController@getSchedulesByType');
+Route::get('/getSchedulesType','ScheduleController@getSchedulesByType');
 
 //Get schedules by gender
-Route::get('/getSchedulesGender/{date?}','ScheduleController@getSchedulesByGender');
+Route::get('/getSchedulesGender','ScheduleController@getSchedulesByGender');
 
 //count total pending
 Route::get('/countPending','HomeController@countPending');
@@ -64,5 +64,8 @@ Route::get('/countUsers','HomeController@countTotalUsers');
 
 // getUsersSchedule
 Route::get('/getUsersSchedule','HomeController@getUsersSchedule');
+
+//get all scores
+Route::get('/getAllScore','ScheduleController@getAllScore');
 
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );

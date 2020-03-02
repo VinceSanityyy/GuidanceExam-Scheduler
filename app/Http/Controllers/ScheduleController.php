@@ -130,7 +130,7 @@ class ScheduleController extends Controller
         $schedule = \DB::table('schedules')
                     ->select('users.*','schedules.id as scid','schedules.user_id',
                     'schedules.start_date','schedules.end_date','schedules.schedule_type',
-                    'schedules.isConfirmed',
+                    'schedules.isConfirmed','schedules.type',
                     \DB::raw("SUBSTRING_INDEX(schedules.start_date, ' ', 1) AS date"),
                     \DB::raw("SUBSTRING(schedules.start_date, LOCATE(' ', schedules.start_date)) AS start_time"),
                     \DB::raw("SUBSTRING(schedules.end_date, LOCATE(' ', schedules.end_date)) AS end_time"),
@@ -172,31 +172,35 @@ class ScheduleController extends Controller
 
 
     public function getSchedulesByYearLevel(Request $request){
-        $date = $request->date;
-        $formatted_year = Carbon::parse($date)->format('yy');
-        $formatted_month = Carbon::parse($date)->format('m');
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
+        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
         $schedules = \DB::table('schedules')
                     ->join('users','users.id','=','schedules.user_id')
                     ->select('users.yearlevel as label',\DB::raw("COUNT('schedules.*') as value"))
                     ->groupBy('users.yearlevel')
-                    ->whereYear('schedules.created_at', $formatted_year)
-                    ->whereMonth('schedules.created_at', $formatted_month)
+                    // ->whereYear('schedules.created_at', $formatted_year)
+                    // ->whereMonth('schedules.created_at', $formatted_month)
+                    ->whereBetween('schedules.created_at', [$formatted_date_from,$formatted_date_to])
                     ->get();
         // dd($formatted_year);
         return response()->json($schedules);        
     }
 
     public function getSchedulesByCourse(Request $request){
-        $date = $request->date;
-        $formatted_year = Carbon::parse($date)->format('yy');
-        $formatted_month = Carbon::parse($date)->format('m');
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
+        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
 
         $schedules = \DB::table('schedules')
         ->join('users','users.id','=','schedules.user_id')
         ->select('users.course as label',\DB::raw("COUNT('schedules.*') as value"))
         ->groupBy('users.course')
-        ->whereYear('schedules.created_at', $formatted_year)
-        ->whereMonth('schedules.created_at', $formatted_month)
+        // ->whereYear('schedules.created_at', $formatted_year)
+        // ->whereMonth('schedules.created_at', $formatted_month)
+        ->whereBetween('schedules.created_at', [$formatted_date_from,$formatted_date_to])
         ->get();
 
         // dd($formatted_year);
@@ -204,15 +208,17 @@ class ScheduleController extends Controller
     }
 
     public function getSchedulesByType(Request $request){
-        $date = $request->date;
-        $formatted_year = Carbon::parse($date)->format('yy');
-        $formatted_month = Carbon::parse($date)->format('m');
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
+        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
 
         $schedules = \DB::table('schedules')
         ->select('schedules.type as label',\DB::raw("COUNT('schedules.*') as value"))
         ->groupBy('schedules.type')
-        ->whereYear('schedules.created_at', $formatted_year)
-        ->whereMonth('schedules.created_at', $formatted_month)
+        // ->whereYear('schedules.created_at', $formatted_year)
+        // ->whereMonth('schedules.created_at', $formatted_month)
+        ->whereBetween('schedules.created_at', [$formatted_date_from,$formatted_date_to])
         ->get();
 
         // dd($formatted_year);
@@ -220,19 +226,52 @@ class ScheduleController extends Controller
     }
 
     public function getSchedulesByGender(Request $request){
-        $date = $request->date;
-        $formatted_year = Carbon::parse($date)->format('yy');
-        $formatted_month = Carbon::parse($date)->format('m');
-
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
+        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
+        // dd($formatted_date_from);
         $schedules = \DB::table('schedules')
         ->join('users','users.id','=','schedules.user_id')
         ->select('users.sex as label',\DB::raw("COUNT('schedules.*') as value"))
         ->groupBy('users.sex')
-        ->whereYear('schedules.created_at', $formatted_year)
-        ->whereMonth('schedules.created_at', $formatted_month)
+        // ->whereYear('schedules.created_at', $formatted_year)
+        // ->whereMonth('schedules.created_at', $formatted_month)
+        ->whereBetween('schedules.created_at', [$formatted_date_from,$formatted_date_to])
         ->get();
+
+        // $date_from = $request->date_from;
+        // $date_to = $request->date_to;
+        // $formatted_date_from = Carbon::parse($date_from)->format('yy-m');
+        // $formatted_date_to = Carbon::parse($date_to)->format('yy-m');
+        // ->whereBetween('schedules.created_at', [$formatted_date_from,$formatted_date_to])
 
         // dd($formatted_year);
         return response()->json($schedules);
+    }
+
+    public function getAllScore(){
+        $all = \DB::table('answers')
+                    ->join('choices', function ($q) {
+                    $q->on('answers.choice_id','=','choices.choice_id')
+                    ->on('answers.question_id', '=', 'choices.question_id');
+                    })
+                    ->select('schedules.schedule_type','schedules.isConfirmed','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
+                    \DB::raw('CAST(sum(choices.value) as int)as score'))
+                    ->join('users','users.id','answers.user_id')
+                    ->join('schedules','schedules.user_id','answers.user_id')
+                    ->where('schedules.schedule_type','LIKE','%Examination%')
+                    ->where('schedules.isConfirmed',2)
+                    // ->where('answers.user_id',\Auth::user()->id)
+                    ->groupBy('answers.user_id')
+                    ->get();
+        return response()->json($all);
+        /**
+         * Classification
+         * 0-13 = Mild
+         * 14-19 = Minimal
+         * 20-28 = Moderate
+         * 29-63  = Severe
+         */
     }
 }

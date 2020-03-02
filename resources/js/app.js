@@ -49,6 +49,7 @@ const routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/schedules', component: require('./components/Schedules.vue').default },
     { path: '/reports', component: require('./components/Reports.vue').default },
+    { path: '/results', component: require('./components/Results.vue').default },
   ]
 
 const router = new VueRouter({

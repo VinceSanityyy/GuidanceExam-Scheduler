@@ -14,6 +14,7 @@
                         <th>Type of Appointment</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Schedule Type</th>
                         <th>Current Status</th>
                         <th>Actions</th>
                      </tr>
@@ -25,6 +26,7 @@
                         <td>{{schedule.schedule_type}}</td>
                         <td>{{schedule.date.trim() | moment("dddd, MMMM D, YYYY")}}</td>
                         <td>{{schedule.start_time.trim() | moment(" hh:mm a")}} - {{schedule.end_time | moment(" hh:mm a")}}</td>
+                        <td>{{schedule.type}}</td>
                         <td v-if="schedule.isConfirmed == 1"><span class="label label-success">Approved</span></td>
                         <td v-else-if="schedule.isConfirmed == 2"><span class="label label-info">Finished Exam in Mobile</span></td>
                         <td v-else><span class="label label-danger">Pending</span></td>

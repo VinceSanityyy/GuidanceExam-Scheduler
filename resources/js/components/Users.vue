@@ -125,7 +125,7 @@
                                     <option value = "BSIT/CS">BSIT/CS</option>
                                     <option value = "BSED/BEED">BSED/BEED</option>
                                     <option value = "BSBA">BSBA</option>
-                                    <option value = "BSAT/BSA">BSAT/BAS</option>
+                                    <option value = "BSAT/BSA">BSAT/BSA</option>
                                     <option value = "BSHRM/TM">BSHRM/TM</option>
                                     <option value = "BSCJ">BSCJ</option>
                                     <option value = "ENG'G">ENG'G</option>
