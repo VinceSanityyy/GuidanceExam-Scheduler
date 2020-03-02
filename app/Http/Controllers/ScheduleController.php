@@ -174,8 +174,8 @@ class ScheduleController extends Controller
     public function getSchedulesByYearLevel(Request $request){
         $date_from = $request->date_from;
         $date_to = $request->date_to;
-        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
-        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
+        $formatted_date_from = Carbon::parse($date_from)->startOfMonth();
+        $formatted_date_to = Carbon::parse($date_to)->endOfMonth();
         $schedules = \DB::table('schedules')
                     ->join('users','users.id','=','schedules.user_id')
                     ->select('users.yearlevel as label',\DB::raw("COUNT('schedules.*') as value"))
@@ -191,8 +191,8 @@ class ScheduleController extends Controller
     public function getSchedulesByCourse(Request $request){
         $date_from = $request->date_from;
         $date_to = $request->date_to;
-        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
-        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
+        $formatted_date_from = Carbon::parse($date_from)->startOfMonth();
+        $formatted_date_to = Carbon::parse($date_to)->endOfMonth();
 
         $schedules = \DB::table('schedules')
         ->join('users','users.id','=','schedules.user_id')
@@ -210,8 +210,8 @@ class ScheduleController extends Controller
     public function getSchedulesByType(Request $request){
         $date_from = $request->date_from;
         $date_to = $request->date_to;
-        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
-        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
+        $formatted_date_from = Carbon::parse($date_from)->startOfMonth();
+        $formatted_date_to = Carbon::parse($date_to)->endOfMonth();
 
         $schedules = \DB::table('schedules')
         ->select('schedules.type as label',\DB::raw("COUNT('schedules.*') as value"))
@@ -228,9 +228,9 @@ class ScheduleController extends Controller
     public function getSchedulesByGender(Request $request){
         $date_from = $request->date_from;
         $date_to = $request->date_to;
-        $formatted_date_from = Carbon::parse($date_from)->format('yy-m-d');
-        $formatted_date_to = Carbon::parse($date_to)->format('yy-m-d');
-        // dd($formatted_date_from);
+        $formatted_date_from = Carbon::parse($date_from)->startOfMonth();
+        $formatted_date_to = Carbon::parse($date_to)->endOfMonth();
+        // dd($formatted_date_from)->startOfMonth();;
         $schedules = \DB::table('schedules')
         ->join('users','users.id','=','schedules.user_id')
         ->select('users.sex as label',\DB::raw("COUNT('schedules.*') as value"))
@@ -242,8 +242,8 @@ class ScheduleController extends Controller
 
         // $date_from = $request->date_from;
         // $date_to = $request->date_to;
-        // $formatted_date_from = Carbon::parse($date_from)->format('yy-m');
-        // $formatted_date_to = Carbon::parse($date_to)->format('yy-m');
+        // $formatted_date_from = Carbon::parse($date_from)->startOfMonth();->format('yy-m');
+        // $formatted_date_to = Carbon::parse($date_to)->endOfMonth();->format('yy-m');
         // ->whereBetween('schedules.created_at', [$formatted_date_from,$formatted_date_to])
 
         // dd($formatted_year);
@@ -257,7 +257,7 @@ class ScheduleController extends Controller
                     ->on('answers.question_id', '=', 'choices.question_id');
                     })
                     ->select('schedules.schedule_type','schedules.isConfirmed','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
-                    \DB::raw('CAST(sum(choices.value) as int)as score'))
+                    \DB::raw('CAST(SUM(choices.value) as int)as score'))
                     ->join('users','users.id','answers.user_id')
                     ->join('schedules','schedules.user_id','answers.user_id')
                     ->where('schedules.schedule_type','LIKE','%Examination%')

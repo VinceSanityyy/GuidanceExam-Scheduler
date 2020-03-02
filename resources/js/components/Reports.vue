@@ -115,13 +115,13 @@
                 opt:{
                     showClear: true,
                     useCurrent: false,
-                    format: 'YYYY-MM-D'
+                    format: 'YYYY-MM'
                 },
                 date_to: new Date(),
                 opt:{
                     showClear: true,
                     useCurrent: false,
-                    format: 'YYYY-MM-D'
+                    format: 'YYYY-MM'
                 },
                 chartYearLevel:{
                     type: 'column2d',
