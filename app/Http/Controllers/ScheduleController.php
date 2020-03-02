@@ -257,12 +257,12 @@ class ScheduleController extends Controller
                     ->on('answers.question_id', '=', 'choices.question_id');
                     })
                     ->select('schedules.schedule_type','schedules.isConfirmed','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
-                    \DB::raw('CAST(SUM(choices.value) as int)as score'))
+                    \DB::raw('SUM(choices.value)as score'))
                     ->join('users','users.id','answers.user_id')
                     ->join('schedules','schedules.user_id','answers.user_id')
                     ->where('schedules.schedule_type','LIKE','%Examination%')
                     ->where('schedules.isConfirmed',2)
-                    // ->where('answers.user_id',\Auth::user()->id)
+                   
                     ->groupBy('answers.user_id')
                     ->get();
         return response()->json($all);
