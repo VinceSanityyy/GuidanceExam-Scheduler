@@ -139,7 +139,7 @@
                             <div class="form-group">
                                 <label>Select Student</label>
                                 <select required v-model="form.user_id" class="form-control" :class="{ 'is-user_id': form.errors.has('isConfirmed') }">
-                                    <option :value="user.id" v-for="user in users" :key="user.id">{{user.name}}</option>
+                                    <option :value="user.id" v-for="user in users" :key="user.id">{{user.name}} - {{user.id_number}}</option>
                                 </select>
                                  <has-error :form="form" field="user_id"></has-error>
                             </div>
