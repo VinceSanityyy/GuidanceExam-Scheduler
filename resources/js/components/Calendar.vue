@@ -212,11 +212,20 @@
       },
       methods:{
           createSchedule(){
+              $('#exampleModal').modal('hide');
+              $(".modal-backdrop").remove();
+               let loader = this.$loading.show({
+                            container: this.fullPage ? null : this.$refs.formContainer,
+                            onCancel: this.onCancel,
+                            color: '#c91010',
+                            loader: 'bars',
+                            width: 80,
+                            height: 100,
+                            })
             this.form.post('/addSchedule')
               .then(({data})=>{
                 swal.fire("Schedule Created!", "", "success");
-                $('#exampleModal').modal('hide');
-                $(".modal-backdrop").remove();
+                loader.hide()  
                 this.form.reset()
                 let classColor
                  let params = { date: this.date};

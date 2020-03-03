@@ -37,6 +37,7 @@ Route::post('/getSchedule','ScheduleController@index');
 
 Route::get('/getAllSchedule','ScheduleController@getAllSchedules');
 Route::put('/updateSchedule/{id}','ScheduleController@updateSchedule');
+Route::put('/reSched/{id}','ScheduleController@reSchedule');
 
 //Get all scores in every user
 Route::get('/getAllScores','QuestionController@getAllScores');

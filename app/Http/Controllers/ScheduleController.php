@@ -41,6 +41,45 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+
+        $user_id = $request->user_id;
+
+        $creds = \DB::table('users')
+                    ->where('id',$user_id)
+                    ->select('email','mobile')
+                    ->get();
+        $res = json_decode($creds,true);
+        $email_address = $res[0]['email'];
+        $mobile_number = $res[0]['mobile'];
+
+        // dd($mobile_number);
+        
+        // dd($request->date);
+     
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+        $beautymail->send('emails.email', [
+            'date' => $request->date,
+            'from' => date("g:i a", strtotime($request->from)),
+            'to' =>  date("g:i a", strtotime($request->to)),
+        ], function($message) use($email_address,$request) 
+            {
+                $message
+                    ->from('UMTC@umindanao.edu.ph','UMTC Scheduler')
+                    ->to($email_address)
+                    ->subject('UMTC Scheduler');
+            });
+
+        // $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+        // $client = new \Nexmo\Client($basic);
+            
+        // $message = $client->message()->send([
+        //         'to' => $mobile_number,
+        //         'from' => 'UMTC Scheduler',
+        //         'text' => 'Good Day! This is to inform that your schedule for consultation is on '.$request->date.' from 
+        //         '.date("g:i a", strtotime($request->from)).' to '.date("g:i a", strtotime($request->to)).'. Kindly go to the guidance office for more information.'
+        //     ]);   
+        
+
         $this->validate($request, [
             'type' => 'required',
             'user_id' => 'required',
@@ -63,7 +102,7 @@ class ScheduleController extends Controller
                 // 'id_number' => $request['id_number'],
                 'user_id' => $request['user_id'],
                 'type' => $request['typeOfSched'],
-                'isConfirmed' => 0
+                'isConfirmed' => 1
                ]);
         }
 
@@ -74,7 +113,7 @@ class ScheduleController extends Controller
             // 'id_number' => $request['id_number'],
             'user_id' => $request['user_id'],
             'type' => $request['typeOfSched'],
-            'isConfirmed' => 0
+            'isConfirmed' => 1
            ]);
       
         // dd($request->all());
@@ -164,6 +203,41 @@ class ScheduleController extends Controller
         //         'to' => $request->mobile,
         //         'from' => 'UMTC Scheduler',
         //         'text' => 'Your request has been approved by the guidance office.'
+        //     ]);
+
+        
+        $schedule_id->save($request->all());
+    }
+
+    public function reSchedule(Request $request,$id){
+        $schedule_id = schedule::findOrFail($id);
+        // $schedule_id = $request->scid;
+
+        $schedule_id->start_date = $request->date.' '.rtrim($request->from);
+        $schedule_id->end_date = $request->date.' '.rtrim($request->to);
+       
+        $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+        $beautymail->send('emails.resched', [
+            'date' => $request->date,
+            'from' => date("g:i a", strtotime($request->from)),
+            'to' =>  date("g:i a", strtotime($request->to)),
+        ], function($message) use($request) 
+            {
+                $message
+                    ->from('UMTC@umindanao.edu.ph','UMTC Scheduler')
+                    ->to($request->email)
+                    ->subject('UMTC Scheduler');
+            });
+
+
+        // $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+        //     $client = new \Nexmo\Client($basic);
+            
+        // $message = $client->message()->send([
+        //         'to' => $request->mobile,
+        //         'from' => 'UMTC Scheduler',
+        //         'text' => 'Your request from the guidance office has been rescheduled to '
+        //          .$request->date.' from '.date("g:i a", strtotime($request->from)). ' to ' .date("g:i a", strtotime($request->to)). ''
         //     ]);
 
         
