@@ -140,7 +140,7 @@ class QuestionsController extends Controller
 
         return schedule::create([
             'schedule_type' => $request['type'],
-            'start_date' => $request['date'].' '.trtim($request['from']),
+            'start_date' => $request['date'].' '.rtrim($request['from']),
             'end_date' => $request['date'].' '.rtrim($request['to']),
             // 'id_number' => $request['id_number'],
             'user_id' => \Auth::user()->id,

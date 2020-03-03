@@ -157,14 +157,14 @@ class ScheduleController extends Controller
             });
 
 
-        $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
-            $client = new \Nexmo\Client($basic);
+        // $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+        //     $client = new \Nexmo\Client($basic);
             
-        $message = $client->message()->send([
-                'to' => $request->mobile,
-                'from' => 'UMTC Scheduler',
-                'text' => 'Your request has been approved by the guidance office.'
-            ]);
+        // $message = $client->message()->send([
+        //         'to' => $request->mobile,
+        //         'from' => 'UMTC Scheduler',
+        //         'text' => 'Your request has been approved by the guidance office.'
+        //     ]);
 
         
         $schedule_id->save($request->all());
