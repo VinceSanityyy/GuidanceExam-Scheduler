@@ -69,6 +69,12 @@ class AuthController extends ResponseController
         $name = Auth::user()->name;
         $course = Auth::user()->course;
         $success =  $user->createToken('token')->accessToken;
+        $countExam = \DB::table('schedules')
+                        ->join('users','users.id','=','schedules.user_id')
+                        ->where('schedules.isConfirmed',1)
+                        ->where('users.id',$user_id)
+                        ->count();
+
         return $this->sendResponse([
             'status' => 'success',
             'bearer_token' =>$success,
@@ -77,6 +83,7 @@ class AuthController extends ResponseController
             'email' => $email,
             'name' => $name,
             'course' =>$course,
+            'count' =>$countExam,
             ]);
         }
 
