@@ -41,5 +41,8 @@ Route::group([ 'prefix' => 'auth'], function (){
 
         //Create Schedule
         Route::post('/createSchedule','API\QuestionsController@createSchedule');
+
+        //Get Notiff
+        Route::get('/getNotif','API\QuestionsController@getNotif');
     });
 }); 

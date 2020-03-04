@@ -86,14 +86,7 @@ class ScheduleController extends Controller
             'typeOfSched' => 'required',
            ]);
 
-        if($request['type'] == 'Examination - College Adjustment Scale'
-        ||$request['type'] == 'Examination - Standard Progressive Matrices'
-        ||$request['type'] == 'Examination - 16 Personality Factor Test'
-        ||$request['type'] == "Examination - Beck's Depression Inventory"
-        ||$request['type'] == 'Examination - Filipino Work Values Scale'
-        ||$request['type'] == 'Examination - IQ Test'
-        ||$request['type'] == 'Examination - Basic Personality Inventory'
-        ||$request['type'] == 'Examination - BarOn Emotional Quotient Inventory'
+        if($request['type'] == "Examination - Beck's Depression Inventory"
         ){
             return schedule::create([
                 'schedule_type' => $request['type'],
@@ -105,18 +98,49 @@ class ScheduleController extends Controller
                 'isConfirmed' => 1
                ]);
         }
+        elseif($request['type'] == 'Examination - College Adjustment Scale'
+        ||$request['type'] == 'Examination - Standard Progressive Matrices'
+        ||$request['type'] == 'Examination - 16 Personality Factor Test'
+        ||$request['type'] == 'Examination - Filipino Work Values Scale'
+        ||$request['type'] == 'Examination - IQ Test'
+        ||$request['type'] == 'Examination - Basic Personality Inventory'
+        ||$request['type'] == 'Examination - BarOn Emotional Quotient Inventory'){
 
-        return schedule::create([
-            'schedule_type' => $request['type'],
-            'start_date' => $request['date'].' '.rtrim($request['from']),
-            'end_date' => $request['date'].' '.rtrim($request['to']),
-            // 'id_number' => $request['id_number'],
-            'user_id' => $request['user_id'],
-            'type' => $request['typeOfSched'],
-            'isConfirmed' => 1
-           ]);
+          
+            
+
+             schedule::create([
+                'schedule_type' => $request['type'],
+                'start_date' => $request['date'],
+                'end_date' => $request['date'],
+                // 'id_number' => $request['id_number'],
+                'user_id' => $request['user_id'],
+                'type' => $request['typeOfSched'],
+                'isConfirmed' => 1 
+            ]);
+
+            \DB::table('answers')->insert([
+                'question_id' => 1,
+                'choice_id' => 1,
+                'user_id' => $user_id
+            ]);
+
+        }
+        elseif($request['type'] == 'Consultation'){
+
+            return schedule::create([
+                'schedule_type' => $request['type'],
+                'start_date' => $request['date'].' '.rtrim($request['from']),
+                'end_date' => $request['date'].' '.rtrim($request['to']),
+                // 'id_number' => $request['id_number'],
+                'user_id' => $request['user_id'],
+                'type' => $request['typeOfSched'],
+                'isConfirmed' => 1
+               ]);
+        }
+
+       
       
-        // dd($request->all());
     }
     /**
      * Display the specified resource.
@@ -206,7 +230,80 @@ class ScheduleController extends Controller
         //     ]);
 
         
+        \DB::table('notifications')->insert([
+            'schedule_id' => $schedule_id->id,
+            'message' => 'Request from Guidance Office has been approved!'
+        ]);
+
         $schedule_id->save($request->all());
+    }
+
+    public function setScheduleResults(Request $request, $id){
+        $schedule_id = schedule::findOrFail($id);
+
+       
+        $schedule_id->isConfirmed = $request->status;
+
+        $user_id = $schedule_id->user_id;
+
+
+       
+
+           /**
+         * Classification
+         * 0-13 = Mild
+         * 14-19 = Minimal
+         * 20-28 = Moderate
+         * 29-63  = Severe
+         */
+
+         if($request->result == 'Mild'){
+            \DB::table('answers')->insert([
+                'question_id' => 2,
+                'choice_id' => 3,
+                'user_id' => $user_id
+            ]);
+         }
+         elseif($request->result == 'Minimal'){
+            \DB::table('answers')->insert([
+                ['question_id' => 2,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 3,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 4,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 5,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 6,'choice_id' => 4,'user_id' => $user_id],
+            ]);
+         }
+         elseif($request->result == 'Moderate'){
+            \DB::table('answers')->insert([
+                ['question_id' => 2,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 3,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 4,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 5,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 6,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 7,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 8,'choice_id' => 4,'user_id' => $user_id],
+            ]);
+         }
+         elseif($request->result == 'severe'){
+            \DB::table('answers')->insert([
+                ['question_id' => 2,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 3,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 4,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 5,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 6,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 7,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 8,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 9,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 10,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 11,'choice_id' => 4,'user_id' => $user_id],
+                ['question_id' => 12,'choice_id' => 4,'user_id' => $user_id],
+                
+            ]);
+         }
+         
+         
+
+         $schedule_id->save($request->all());
     }
 
     public function reSchedule(Request $request,$id){
@@ -330,13 +427,15 @@ class ScheduleController extends Controller
                     $q->on('answers.choice_id','=','choices.choice_id')
                     ->on('answers.question_id', '=', 'choices.question_id');
                     })
-                    ->select('schedules.schedule_type','schedules.isConfirmed','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
+                    ->select('schedules.id as resId','schedules.schedule_type','schedules.isConfirmed','schedules.start_date','schedules.end_date','answers.user_id', 'users.name','users.course','users.age','users.email',
                     \DB::raw('SUM(choices.value)as score'))
+                    // ->rightJoin('users as u','users.id','=','schedules.user_id')
                     ->join('users','users.id','answers.user_id')
                     ->join('schedules','schedules.user_id','answers.user_id')
                     ->where('schedules.schedule_type','LIKE','%Examination%')
-                    ->where('schedules.isConfirmed',2)
-                   
+                    ->orWhere('schedules.isConfirmed',2)
+                    ->orWhere('schedules.isConfirmed',1)
+                    ->orWhere('schedules.isConfirmed',4)
                     ->groupBy('answers.user_id')
                     ->get();
         return response()->json($all);

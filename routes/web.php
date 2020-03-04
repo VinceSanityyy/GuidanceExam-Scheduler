@@ -69,4 +69,7 @@ Route::get('/getUsersSchedule','HomeController@getUsersSchedule');
 //get all scores
 Route::get('/getAllScore','ScheduleController@getAllScore');
 
+// set status schedule
+Route::put('/setScheduleResults/{id}','ScheduleController@setScheduleResults');
+
 Route::get('{path}','HomeController@index')->where( 'path', '([A-z]+)?' );

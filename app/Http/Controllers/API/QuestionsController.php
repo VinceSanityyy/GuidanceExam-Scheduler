@@ -116,16 +116,9 @@ class QuestionsController extends Controller
     //     return response()->json($all);
     // }
 
-
+    
     public function createSchedule (Request $request){
-        if($request['type'] == 'Examination - College Adjustment Scale'
-        ||$request['type'] == 'Examination - Standard Progressive Matrices'
-        ||$request['type'] == 'Examination - 16 Personality Factor Test'
-        ||$request['type'] == "Examination - Beck's Depression Inventory"
-        ||$request['type'] == 'Examination - Filipino Work Values Scale'
-        ||$request['type'] == 'Examination - IQ Test'
-        ||$request['type'] == 'Examination - Basic Personality Inventory'
-        ||$request['type'] == 'Examination - BarOn Emotional Quotient Inventory'
+        if($request['type'] == "Examination - Beck's Depression Inventory"
         ){
             return schedule::create([
                 'schedule_type' => $request['type'],
@@ -137,15 +130,55 @@ class QuestionsController extends Controller
                 'type' => $request['typeOfSched'],
                ]);
         }
+        elseif($request['type'] == 'Examination - College Adjustment Scale'
+        ||$request['type'] == 'Examination - Standard Progressive Matrices'
+        ||$request['type'] == 'Examination - 16 Personality Factor Test'
+        ||$request['type'] == 'Examination - Filipino Work Values Scale'
+        ||$request['type'] == 'Examination - IQ Test'
+        ||$request['type'] == 'Examination - Basic Personality Inventory'
+        ||$request['type'] == 'Examination - BarOn Emotional Quotient Inventory'){
 
-        return schedule::create([
-            'schedule_type' => $request['type'],
-            'start_date' => $request['date'].' '.rtrim($request['from']),
-            'end_date' => $request['date'].' '.rtrim($request['to']),
-            // 'id_number' => $request['id_number'],
-            'user_id' => \Auth::user()->id,
-            'isConfirmed' => 0,
-            'type' => $request['typeOfSched'],
-           ]);
+            schedule::create([
+                'schedule_type' => $request['type'],
+                'start_date' => $request['date'],
+                'end_date' => $request['date'],
+                // 'id_number' => $request['id_number'],
+                'user_id' => $request['user_id'],
+                'type' => $request['typeOfSched'],
+                'isConfirmed' => 1 
+            ]);
+            \DB::table('answers')->insert([
+                'question_id' => 1,
+                'choice_id' => 1,
+                'user_id' => \Auth::user()->id,
+            ]);
+        }
+
+        elseif($request['type'] == 'Consultation'){
+            return schedule::create([
+                'schedule_type' => $request['type'],
+                'start_date' => $request['date'].' '.rtrim($request['from']),
+                'end_date' => $request['date'].' '.rtrim($request['to']),
+                // 'id_number' => $request['id_number'],
+                'user_id' => \Auth::user()->id,
+                'isConfirmed' => 0,
+                'type' => $request['typeOfSched'],
+               ]);
+        }
+
+       
     }
+
+    public function getNotif(){
+        $notif = \DB::table('notifications')
+                ->join('schedules','schedules.id','notifications.schedule_id')
+                ->where('schedules.isConfirmed',1)
+                ->where('schedules.user_id',\Auth::user()->id)
+                ->select('schedules.schedule_type','notifications.message','schedules.start_date')
+                ->get();
+
+        return response()->json($notif);
+    }
+
+    
 }
