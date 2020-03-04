@@ -312,6 +312,7 @@ class ScheduleController extends Controller
 
         $schedule_id->start_date = $request->date.' '.rtrim($request->from);
         $schedule_id->end_date = $request->date.' '.rtrim($request->to);
+        $schedule_id->isConfirmed = 1;
        
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
         $beautymail->send('emails.resched', [
