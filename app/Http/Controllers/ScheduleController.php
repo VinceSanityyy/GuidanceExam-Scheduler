@@ -69,15 +69,15 @@ class ScheduleController extends Controller
                     ->subject('UMTC Scheduler');
             });
 
-        // $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
-        // $client = new \Nexmo\Client($basic);
+        $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+        $client = new \Nexmo\Client($basic);
             
-        // $message = $client->message()->send([
-        //         'to' => $mobile_number,
-        //         'from' => 'UMTC Scheduler',
-        //         'text' => 'Good Day! This is to inform that your schedule for consultation is on '.$request->date.' from 
-        //         '.date("g:i a", strtotime($request->from)).' to '.date("g:i a", strtotime($request->to)).'. Kindly go to the guidance office for more information.'
-        //     ]);   
+        $message = $client->message()->send([
+                'to' => $mobile_number,
+                'from' => 'UMTC Scheduler',
+                'text' => 'Good Day! This is to inform that your schedule for consultation is on '.$request->date.' from 
+                '.date("g:i a", strtotime($request->from)).' to '.date("g:i a", strtotime($request->to)).'. Kindly go to the guidance office for more information.'
+            ]);   
         
 
         $this->validate($request, [
@@ -220,14 +220,14 @@ class ScheduleController extends Controller
             });
 
 
-        // $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
-        //     $client = new \Nexmo\Client($basic);
+        $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+            $client = new \Nexmo\Client($basic);
             
-        // $message = $client->message()->send([
-        //         'to' => $request->mobile,
-        //         'from' => 'UMTC Scheduler',
-        //         'text' => 'Your request has been approved by the guidance office.'
-        //     ]);
+        $message = $client->message()->send([
+                'to' => $request->mobile,
+                'from' => 'UMTC Scheduler',
+                'text' => 'Your request has been approved by the guidance office.'
+            ]);
 
         
         \DB::table('notifications')->insert([
@@ -327,15 +327,15 @@ class ScheduleController extends Controller
             });
 
 
-        // $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
-        //     $client = new \Nexmo\Client($basic);
+        $basic  = new \Nexmo\Client\Credentials\Basic('e0de6744', 'wVLksPGxoZp75TSl');
+            $client = new \Nexmo\Client($basic);
             
-        // $message = $client->message()->send([
-        //         'to' => $request->mobile,
-        //         'from' => 'UMTC Scheduler',
-        //         'text' => 'Your request from the guidance office has been rescheduled to '
-        //          .$request->date.' from '.date("g:i a", strtotime($request->from)). ' to ' .date("g:i a", strtotime($request->to)). ''
-        //     ]);
+        $message = $client->message()->send([
+                'to' => $request->mobile,
+                'from' => 'UMTC Scheduler',
+                'text' => 'Your request from the guidance office has been rescheduled to '
+                 .$request->date.' from '.date("g:i a", strtotime($request->from)). ' to ' .date("g:i a", strtotime($request->to)). ''
+            ]);
 
         
         $schedule_id->save($request->all());
