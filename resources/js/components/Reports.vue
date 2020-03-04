@@ -154,7 +154,7 @@
                                 theme: 'fusion',
                                 decimals: 1,
                                 showpercentagevalues:1,
-                                palettecolors: "#4e4f54,#2e25db,#ede909,#1aa308,##440b73,#cc210e,#e3701e,#000000"
+                                palettecolors: "#1bc41e,#deeb31,#eb3a31,#3197eb,#a731eb,#565159,#000000,#f09a1a"
                             },
                             data:[]
                         }
