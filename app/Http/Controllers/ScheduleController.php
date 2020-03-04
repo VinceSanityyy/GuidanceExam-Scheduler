@@ -337,6 +337,11 @@ class ScheduleController extends Controller
                  .$request->date.' from '.date("g:i a", strtotime($request->from)). ' to ' .date("g:i a", strtotime($request->to)). ''
             ]);
 
+        \DB::table('notifications')->insert([
+                'schedule_id' => $schedule_id->id,
+                'message' => 'Your request from the guidance office has been rescheduled to '.$request->date
+            ]);    
+
         
         $schedule_id->save($request->all());
     }
