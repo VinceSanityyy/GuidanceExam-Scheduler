@@ -26,8 +26,8 @@
                           <td>{{result.schedule_type}}</td>
                           <td>{{result.course}}</td>
                           <!-- <div v-if="1 == 2 || (1 + 2 == 3 && 4 == 4)">I am visible!</div> -->
-                          <td v-if="result.isConfirmed == 4"><span class="label label-primary">Finished</span></td>
-                          <td v-else-if="result.isConfirmed == 2"><span class="label label-info">Finished Exam in Mobile</span></td>
+                          <!-- <td v-if="result.isConfirmed == 4"><span class="label label-primary">Finished</span></td> -->
+                          <td v-if="result.isConfirmed == 2"><span class="label label-info">Finished</span></td>
                           <td v-else><span class="label label-warning">Waiting</span></td>
 
                           <td>{{result.start_date | moment("dddd, MMMM D, YYYY")}}</td>
@@ -61,7 +61,7 @@
                         <select class="form-control" name="status" 
                            v-model="form.status" 
                            :class="{ 'is-invalid': form.errors.has('status') }">
-                           <option value="4">Finished Examination</option>
+                           <option value="2">Finished Examination</option>
                            <option value="0">Pending</option>
                         </select>
                      </div>

@@ -441,7 +441,7 @@ class ScheduleController extends Controller
                     ->where('schedules.schedule_type','LIKE','%Examination%')
                     ->orWhere('schedules.isConfirmed',2)
                     ->orWhere('schedules.isConfirmed',1)
-                    ->orWhere('schedules.isConfirmed',4)
+                    // ->orWhere('schedules.isConfirmed',4)
                     ->groupBy('answers.user_id')
                     ->get();
         return response()->json($all);

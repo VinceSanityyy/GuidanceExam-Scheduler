@@ -28,7 +28,8 @@
                         <td>{{schedule.start_time}} - {{schedule.end_time}}</td>
                         <td>{{schedule.type}}</td>
                         <td v-if="schedule.isConfirmed == 1"><span class="label label-success">Approved</span></td>
-                        <td v-else-if="schedule.isConfirmed == 2"><span class="label label-info">Finished Exam in Mobile</span></td>
+                        <td v-else-if="schedule.isConfirmed == 2"><span class="label label-info">Finished</span></td>
+                        <!-- <td v-else-if="schedule.isConfirmed == 4"><span class="label label-primary">Finished </span></td> -->
                         <td v-else><span class="label label-danger">Pending</span></td>
                         <td>
                            <a href="#" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModal" @click="editModal(schedule)">

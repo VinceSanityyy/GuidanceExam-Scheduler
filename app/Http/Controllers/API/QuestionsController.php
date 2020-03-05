@@ -143,9 +143,9 @@ class QuestionsController extends Controller
                 'start_date' => $request['date'],
                 'end_date' => $request['date'],
                 // 'id_number' => $request['id_number'],
-                'user_id' => $request['user_id'],
+                'user_id' => \Auth::user()->id,
                 'type' => $request['typeOfSched'],
-                'isConfirmed' => 1 
+                'isConfirmed' => 0 
             ]);
             \DB::table('answers')->insert([
                 'question_id' => 1,
@@ -174,7 +174,7 @@ class QuestionsController extends Controller
                 ->join('schedules','schedules.id','notifications.schedule_id')
                 ->where('schedules.isConfirmed',1)
                 ->where('schedules.user_id',\Auth::user()->id)
-                ->select('schedules.schedule_type','notifications.message','schedules.start_date')
+                ->select('schedules.schedule_type','notifications.message')
                 ->get();
 
         return response()->json($notif);
