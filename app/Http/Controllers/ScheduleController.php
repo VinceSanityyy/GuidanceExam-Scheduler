@@ -79,7 +79,7 @@ class ScheduleController extends Controller
         $message = $client->message()->send([
                 'to' => $mobile_number,
                 'from' => 'UMTC Scheduler',
-                'text' => 'Good Day! This is to inform that your schedule for  .'$request->type'.  is on '.$request->date.' from 
+                'text' => 'Good Day! This is to inform that your schedule for  '.$request->type.'  is on '.$request->date.' from 
                 '.date("g:i a", strtotime($request->from)).' to '.date("g:i a", strtotime($request->to)).'. Kindly go to the guidance office for more information.'
             ]);   
         
