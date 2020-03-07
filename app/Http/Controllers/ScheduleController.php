@@ -63,6 +63,7 @@ class ScheduleController extends Controller
         $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
         $beautymail->send('emails.email', [
             'date' => $request->date,
+            'type' => $request->type,
             'from' => date("g:i a", strtotime($request->from)),
             'to' =>  date("g:i a", strtotime($request->to)),
         ], function($message) use($email_address,$request) 
