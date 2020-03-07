@@ -115,6 +115,9 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Main Navigation</li>
         <li class="treeview">
+            <router-link to="/home" class="nav-link" > <i class="fa fa-home "></i> <span> Home</span> </router-link>
+        </li>
+        <li class="treeview">
           @if(Auth::user()->id_number == 0)
             <router-link to="/dashboard" class="nav-link" > <i class="fa fa-dashboard "></i> <span> Dashboard</span> </router-link>
         </li>
