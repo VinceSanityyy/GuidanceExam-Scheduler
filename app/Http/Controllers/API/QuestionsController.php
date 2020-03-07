@@ -130,7 +130,7 @@ class QuestionsController extends Controller
                 'type' => $request['typeOfSched'],
                ]);
         }
-        elseif($request['type'] == 'Examination - College Adjustment Scale' && \Auth::user()->yearlevel == "3rd"
+        elseif($request['type'] == 'Examination - College Adjustment Scale' && \Auth::user()->yearlevel != "3rd"
         ||$request['type'] == 'Examination - Standard Progressive Matrices' && \Auth::user()->yearlevel != "3rd"
         ||$request['type'] == 'Examination - 16 Personality Factor Test' && \Auth::user()->yearlevel != "3rd"
         ||$request['type'] == 'Examination - Filipino Work Values Scale' && \Auth::user()->yearlevel != "3rd"
