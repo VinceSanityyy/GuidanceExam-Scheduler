@@ -40,9 +40,11 @@ class HomeController extends Controller
     public function getUsersSchedule(){
         $users = \DB::table('users')
         ->where('id_number','!=',0)
+        ->select('users.name as label','users.id as id')
         ->where('isConfirmed',1)
         ->get();
 
+    
         return response()->json($users);
     }
 

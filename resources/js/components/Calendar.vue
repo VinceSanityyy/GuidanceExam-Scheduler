@@ -138,10 +138,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Select Student</label>
-                                <select required v-model="form.user_id" class="form-control" :class="{ 'is-user_id': form.errors.has('isConfirmed') }">
+                                <!-- <select required v-model="form.user_id" class="form-control" :class="{ 'is-user_id': form.errors.has('isConfirmed') }">
                                     <option :value="user.id" v-for="user in users" :key="user.id">{{user.name}} - {{user.id_number}}</option>
                                 </select>
-                                 <has-error :form="form" field="user_id"></has-error>
+                                 <has-error :form="form" field="user_id"></has-error> -->
+                                 <v-select :options="users"
+                                 v-model="form.selected"
+                                 
+                                  />
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -158,6 +162,10 @@
 
 </template>
 <script>
+   import vSelect from 'vue-select'
+
+   Vue.component('v-select', vSelect)
+   import 'vue-select/dist/vue-select.css';
    import FullCalendar from '@fullcalendar/vue'
    import dayGridPlugin from '@fullcalendar/daygrid'
    import interactionPlugin from '@fullcalendar/interaction'
@@ -168,6 +176,8 @@
       },
       data(){
          return{
+           
+            selected:'',
             calendarPlugins: [
                dayGridPlugin,
                timeGridPlugin,
@@ -186,6 +196,7 @@
                to:'',
                user_id:'',
                typeOfSched:'',
+               selected:'',
 
             }),
 

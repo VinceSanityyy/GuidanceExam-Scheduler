@@ -42,7 +42,9 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
 
-        $user_id = $request->user_id;
+        // dd($request['selected']['id']);
+
+        $user_id = $request['selected']['id'];
 
         $creds = \DB::table('users')
                     ->where('id',$user_id)
@@ -51,6 +53,8 @@ class ScheduleController extends Controller
         $res = json_decode($creds,true);
         $email_address = $res[0]['email'];
         $mobile_number = $res[0]['mobile'];
+
+        // dd($creds);
 
         // dd($mobile_number);
         
@@ -75,14 +79,14 @@ class ScheduleController extends Controller
         $message = $client->message()->send([
                 'to' => $mobile_number,
                 'from' => 'UMTC Scheduler',
-                'text' => 'Good Day! This is to inform that your schedule for consultation is on '.$request->date.' from 
+                'text' => 'Good Day! This is to inform that your schedule for  .'$request->type'.  is on '.$request->date.' from 
                 '.date("g:i a", strtotime($request->from)).' to '.date("g:i a", strtotime($request->to)).'. Kindly go to the guidance office for more information.'
             ]);   
         
 
         $this->validate($request, [
             'type' => 'required',
-            'user_id' => 'required',
+            'selected' => 'required',
             'typeOfSched' => 'required',
            ]);
 
@@ -93,7 +97,7 @@ class ScheduleController extends Controller
                 'start_date' => $request['date'],
                 'end_date' => $request['date'],
                 // 'id_number' => $request['id_number'],
-                'user_id' => $request['user_id'],
+                'user_id' => $request['selected']['id'],
                 'type' => $request['typeOfSched'],
                 'isConfirmed' => 1
                ]);
@@ -109,21 +113,21 @@ class ScheduleController extends Controller
           
             
 
-             schedule::create([
+             return schedule::create([
                 'schedule_type' => $request['type'],
                 'start_date' => $request['date'],
                 'end_date' => $request['date'],
                 // 'id_number' => $request['id_number'],
-                'user_id' => $request['user_id'],
+                'user_id' => $request['selected']['id'],
                 'type' => $request['typeOfSched'],
                 'isConfirmed' => 1 
-            ]);
-
-            \DB::table('answers')->insert([
+             ], \DB::table('answers')->insert([
                 'question_id' => 1,
                 'choice_id' => 1,
                 'user_id' => $user_id
-            ]);
+            ]));
+
+        
 
         }
         elseif($request['type'] == 'Consultation'){
@@ -133,7 +137,7 @@ class ScheduleController extends Controller
                 'start_date' => $request['date'].' '.rtrim($request['from']),
                 'end_date' => $request['date'].' '.rtrim($request['to']),
                 // 'id_number' => $request['id_number'],
-                'user_id' => $request['user_id'],
+                'user_id' => $request['selected']['id'],
                 'type' => $request['typeOfSched'],
                 'isConfirmed' => 1
                ]);
