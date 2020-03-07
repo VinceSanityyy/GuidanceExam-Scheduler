@@ -185,7 +185,8 @@ import datatables from 'datatables'
                    mobile:'',
                    age:'',
                    course:'',
-                   sex:''
+                   sex:'',
+                   yearlevel:''
 
                })
            }

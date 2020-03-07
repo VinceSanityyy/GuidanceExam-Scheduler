@@ -118,7 +118,7 @@ class QuestionsController extends Controller
 
     
     public function createSchedule (Request $request){
-        if($request['type'] == "Examination - Beck's Depression Inventory"
+        if($request['type'] == "Examination - Beck's Depression Inventory" && \Auth::user()->yearlevel == "3rd"
         ){
             return schedule::create([
                 'schedule_type' => $request['type'],
@@ -130,15 +130,15 @@ class QuestionsController extends Controller
                 'type' => $request['typeOfSched'],
                ]);
         }
-        elseif($request['type'] == 'Examination - College Adjustment Scale'
-        ||$request['type'] == 'Examination - Standard Progressive Matrices'
-        ||$request['type'] == 'Examination - 16 Personality Factor Test'
-        ||$request['type'] == 'Examination - Filipino Work Values Scale'
-        ||$request['type'] == 'Examination - IQ Test'
-        ||$request['type'] == 'Examination - Basic Personality Inventory'
-        ||$request['type'] == 'Examination - BarOn Emotional Quotient Inventory'){
+        elseif($request['type'] == 'Examination - College Adjustment Scale' && \Auth::user()->yearlevel == "3rd"
+        ||$request['type'] == 'Examination - Standard Progressive Matrices' && \Auth::user()->yearlevel != "3rd"
+        ||$request['type'] == 'Examination - 16 Personality Factor Test' && \Auth::user()->yearlevel != "3rd"
+        ||$request['type'] == 'Examination - Filipino Work Values Scale' && \Auth::user()->yearlevel != "3rd"
+        ||$request['type'] == 'Examination - IQ Test' && \Auth::user()->yearlevel != "3rd"
+        ||$request['type'] == 'Examination - Basic Personality Inventory' && \Auth::user()->yearlevel != "3rd"
+        ||$request['type'] == 'Examination - BarOn Emotinal Quotient Inventory'  && \Auth::user()->yearlevel != "3rd"){
 
-            schedule::create([
+            return schedule::create([
                 'schedule_type' => $request['type'],
                 'start_date' => $request['date'],
                 'end_date' => $request['date'],
@@ -146,12 +146,12 @@ class QuestionsController extends Controller
                 'user_id' => \Auth::user()->id,
                 'type' => $request['typeOfSched'],
                 'isConfirmed' => 0 
-            ]);
-            \DB::table('answers')->insert([
+            ],  \DB::table('answers')->insert([
                 'question_id' => 1,
                 'choice_id' => 1,
                 'user_id' => \Auth::user()->id,
-            ]);
+            ]));
+          
         }
 
         elseif($request['type'] == 'Consultation'){
