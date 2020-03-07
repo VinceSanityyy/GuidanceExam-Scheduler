@@ -40,7 +40,7 @@ class HomeController extends Controller
     public function getUsersSchedule(){
         $users = \DB::table('users')
         ->where('id_number','!=',0)
-        ->select('users.name as label','users.id as id')
+        ->select(\DB::raw('CONCAT(users.name," - ", users.id_number) AS label'))
         ->where('isConfirmed',1)
         ->get();
 
