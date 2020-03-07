@@ -45,7 +45,7 @@ class ScheduleController extends Controller
         // dd($request['selected']['id']);
 
         $user_id = $request['selected']['id'];
-
+        // dd($user_id);
         $creds = \DB::table('users')
                     ->where('id',$user_id)
                     ->select('email','mobile')
