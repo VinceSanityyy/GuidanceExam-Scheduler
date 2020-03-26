@@ -14,7 +14,8 @@
         "laravel/passport": "7.5.1",
         "laravel/tinker": "^1.0",
         "nexmo/client": "^2.0",
-        "snowfire/beautymail": "^1.1.2"
+        "pelago/emogrifier": "2.2.0",
+        "snowfire/beautymail": "dev-master"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
