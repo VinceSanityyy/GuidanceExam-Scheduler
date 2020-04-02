@@ -40,7 +40,7 @@
         "vue-moment": "^4.1.0",
         "vue-monthly-picker": "^0.2.8",
         "vue-router": "^3.1.5",
-        "vue-select": "^3.6.0",
+        "vue-select": "^3.9.5",
         "vue-simple-calendar": "^4.3.2",
         "vue-simple-search-dropdown": "^1.0.1"
     }
