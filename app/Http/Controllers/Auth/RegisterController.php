@@ -95,7 +95,8 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
         // Auth::logout($user);
         // return redirect('/welcome')->with('message', 'Account Successfully Registered');
-        abort(403, 'Wait for the admin to confirm your account for mobile use.');
+        // abort(403, 'Wait for the admin to confirm your account for mobile use.');
+        return response()->view('auth.message', [], 403);
         // $request->session()->flash('alert-success', 'Registration successful');
     }
 }
