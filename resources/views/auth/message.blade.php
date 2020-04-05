@@ -2,8 +2,8 @@
 
 <div class="container">
     <div style="margin: auto">
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-        <svg id="a4efc002-80f6-4f30-a290-092c25b18b21" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 1149 784.07921">
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <svg id="a4efc002-80f6-4f30-a290-092c25b18b21" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="350" height="400" viewBox="0 0 1149 784.07921">
             <title>done</title>
             <path d="M460.5,805.0396c0,20.43-95.81,37-214,37s-214-16.57-214-37c0-5.11,5.98-9.97,16.8-14.39,31.5-12.89,104.03-22.05,189.28-22.58q3.945-.02994,7.92-.03C364.69,768.0396,460.5,784.60961,460.5,805.0396Z" transform="translate(-25.5 -57.9604)" fill="#3f3d56" />
             <path d="M238.58,768.06957a121.49608,121.49608,0,0,1-189.28,22.58C80.8,777.75957,153.33,768.5996,238.58,768.06957Z" transform="translate(-25.5 -57.9604)" opacity="0.1" />
