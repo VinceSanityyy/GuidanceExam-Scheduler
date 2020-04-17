@@ -25,7 +25,8 @@ class LoginController extends Controller
     {
         if ($user->id_number != 0) {
             Auth::logout($user);
-            abort(403, 'User available for mobile use only.');
+            // abort(403, 'User available for mobile use only.');
+            return response()->view('auth.mobileUse', [], 403);
         }
     }
 
